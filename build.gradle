@@ -1,0 +1,45 @@
+plugins {
+    id 'java-library'
+}
+
+group 'io.github.mini-python.cbuilder'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+processResources {
+    // copy the folder as is into the jar-archive,
+    // thus making it available as a resource with path 'c-runtime'
+    from('c-runtime') {
+        into('c-runtime')
+    }
+}
+
+dependencies {
+    implementation 'commons-io:commons-io:2.11.0'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+javadoc {
+    failOnError = false
+    options.showFromPublic()
+}
+
+task javadocAll(type: Javadoc) {
+    source = sourceSets.main.allSource
+    classpath = project.sourceSets.main.compileClasspath
+
+    destinationDir = file("${project.docsDir}/javadocAll")
+
+    failOnError = false
+    options.showAll()
+}
+
+test {
+    useJUnitPlatform()
+}
