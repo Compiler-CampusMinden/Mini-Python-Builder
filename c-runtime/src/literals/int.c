@@ -15,6 +15,9 @@
 #include "function-args.h"
 #include "type-hierarchy/bound-method.h"
 
+#define MAX_SINGLE_DIGIT_DECIMAL 9
+#define POSITION_FACTOR_DECIMAL 10
+
 typedef struct MPyIntContent {
     __mpy_int_c_type value;
     __MPyObj *strMethod;
@@ -28,7 +31,7 @@ __MPyObj *__mpy_int_func_str_impl(__MPyObj *args, __MPyObj *kwargs) {
     __MPyObj *self = __mpy_args_get_positional(&argHelper, 0, "self");
     __mpy_args_finish(&argHelper);
 
-    __mpy_int_c_type value = *((__mpy_int_c_type*)self->content);
+    __mpy_int_c_type value = ((MPyIntContent*)self->content)->value;
     __mpy_int_c_type valueCntDigits = value;
 
     size_t digits = 2; // 0 byte + at least one digit
@@ -36,9 +39,9 @@ __MPyObj *__mpy_int_func_str_impl(__MPyObj *args, __MPyObj *kwargs) {
         digits += 1; // sign
         valueCntDigits = llabs(valueCntDigits);
     }
-    while (valueCntDigits > 9) {
+    while (valueCntDigits > MAX_SINGLE_DIGIT_DECIMAL) {
         digits++;
-        valueCntDigits = valueCntDigits / 10;
+        valueCntDigits = valueCntDigits / POSITION_FACTOR_DECIMAL;
     }
 
     char *string = malloc(digits);
