@@ -26,7 +26,7 @@ class BinaryBoolKeyword implements Expression {
         String boolX = "__mpy_boolean_raw(" + boolCallX.buildExpression() + ")";
 
         AttributeReference boolMethodY = new AttributeReference("__bool__", y);
-        Call boolCallY = new Call(boolMethodX, List.of(), Map.of());
+        Call boolCallY = new Call(boolMethodY, List.of(), Map.of());
         String boolY = "__mpy_boolean_raw(" + boolCallY.buildExpression() + ")";
 
         return "__mpy_obj_init_boolean(" + boolX + " " + cOp + " " + boolY + ")";

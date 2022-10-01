@@ -90,3 +90,10 @@ __MPyObj* __mpy_boolean_func_bool_impl(__MPyObj *args, __MPyObj *kwargs) {
 
     return __mpy_obj_return(self);
 }
+
+__mpy_boolean_c_type __mpy_boolean_raw(__MPyObj *self) {
+    assert(self != NULL);
+    assert(self->type == __MPyType_Boolean);
+
+    return ((MPyBooleanContent*)self->content)->value;
+}
