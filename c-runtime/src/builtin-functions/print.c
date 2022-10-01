@@ -1,14 +1,14 @@
 #include "builtin-functions/print.h"
 
-#include <stdio.h>
 #include <assert.h>
+#include <stdio.h>
 
-#include "mpy_obj.h"
 #include "errors.h"
+#include "literals/str.h"
 #include "literals/tuple.h"
+#include "mpy_obj.h"
 #include "type-hierarchy/function.h"
 #include "type-hierarchy/object.h"
-#include "literals/str.h"
 
 __MPyObj* __mpy_func_print(__MPyObj *args, __MPyObj *kwargs) {
     assert(args != NULL && kwargs != NULL);
@@ -24,8 +24,8 @@ __MPyObj* __mpy_func_print(__MPyObj *args, __MPyObj *kwargs) {
         argNr = __mpy_tuple_size(args);
     }
 
-    for (int i = 0; i < argNr; i++) {
-        __MPyObj *obj = __mpy_tuple_get_at(args, 0);
+    for (unsigned int i = 0; i < argNr; i++) {
+        __MPyObj *obj = __mpy_tuple_get_at(args, i);
         __mpy_obj_ref_inc(obj);
 
         __MPyObj *str = __mpy_call(__mpy_obj_get_attr(obj, "__str__"), __mpy_obj_init_tuple(0), NULL);
