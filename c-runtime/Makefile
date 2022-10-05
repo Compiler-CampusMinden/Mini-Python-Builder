@@ -26,13 +26,15 @@ OUTDIR := $(abspath ./out)
 CFLAGS ?= -pedantic -Wall -Werror
 CFLAGS += -std=c11 -I$(INCLUDEDIR)
 CFLAGS += -ffile-prefix-map=$(SRCDIR)=.
+# make getline() (see man getline(3)) available
+CFLAGS += -D_POSIX_C_SOURCE=200809L
 
 ifdef DEBUG
 CFLAGS += -ggdb -DMINI_PYTHON_DEBUG=1 -Og
 LDFLAGS += -ggdb -Og
 else
 # disable assertions
-# not for now CFLAGS += -DNDEBUG 
+# not for now CFLAGS += -DNDEBUG
 endif
 
 ###########

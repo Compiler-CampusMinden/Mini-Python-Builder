@@ -27,6 +27,8 @@ extern __MPyObj *__MPyFunc_print;
 
 extern __MPyObj *__MPyFunc_type;
 
+extern __MPyObj *__MPyFunc_input;
+
 extern __MPyObj *__MPyFunc_Type_str;
 
 extern __MPyObj *__MPyFunc_Int_str;
