@@ -92,6 +92,8 @@ __MPyObj *__MPyFunc_Str_bool;
 
 __MPyObj *__MPyFunc_Str_add;
 
+__MPyObj *__MPyFunc_Str_int;
+
 // compare strings
 __MPyObj *__MPyFunc_Str_eq;
 __MPyObj *__MPyFunc_Str_ne;
@@ -104,6 +106,8 @@ __MPyObj *__MPyFunc_Str_lt;
 __MPyObj *__MPyFunc_Boolean_str;
 
 __MPyObj *__MPyFunc_Boolean_bool;
+
+__MPyObj *__MPyFunc_Boolean_int;
 
 // compare boolean
 __MPyObj *__MPyFunc_Boolean_eq;
@@ -215,6 +219,9 @@ void __mpy_builtins_setup() {
     __MPyFunc_Str_add = __mpy_obj_init_func(&__mpy_str_func_add_impl);
     __mpy_obj_ref_inc(__MPyFunc_Str_add);
 
+    __MPyFunc_Str_int = __mpy_obj_init_func(&__mpy_str_func_int_impl);
+    __mpy_obj_ref_inc(__MPyFunc_Str_int);
+
 // comparing string
     __MPyFunc_Str_eq = __mpy_obj_init_func(&__mpy_str_func_eq_impl);
     __mpy_obj_ref_inc(__MPyFunc_Str_eq);
@@ -234,6 +241,9 @@ void __mpy_builtins_setup() {
 
     __MPyFunc_Boolean_str = __mpy_obj_init_func(&__mpy_boolean_func_str_impl);
     __mpy_obj_ref_inc(__MPyFunc_Boolean_str);
+
+    __MPyFunc_Boolean_int = __mpy_obj_init_func(&__mpy_boolean_func_int_impl);
+    __mpy_obj_ref_inc(__MPyFunc_Boolean_int);
 
 // comparing boolean
     __MPyFunc_Boolean_eq = __mpy_obj_init_func(&__mpy_boolean_func_eq_impl);

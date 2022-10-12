@@ -75,6 +75,8 @@ extern __MPyObj *__MPyFunc_Str_bool;
 
 extern __MPyObj *__MPyFunc_Str_add;
 
+extern __MPyObj *__MPyFunc_Str_int;
+
 // comparing
 extern __MPyObj *__MPyFunc_Str_eq;
 extern __MPyObj *__MPyFunc_Str_ne;
@@ -87,6 +89,8 @@ extern __MPyObj *__MPyFunc_Str_lt;
 extern __MPyObj *__MPyFunc_Boolean_str;
 
 extern __MPyObj *__MPyFunc_Boolean_bool;
+
+extern __MPyObj *__MPyFunc_Boolean_int;
 
 // compare boolean
 extern __MPyObj *__MPyFunc_Boolean_eq;

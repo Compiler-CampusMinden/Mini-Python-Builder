@@ -11,6 +11,8 @@ __MPyObj* __mpy_boolean_func_str_impl(__MPyObj *args, __MPyObj *kwargs);
 
 __MPyObj* __mpy_boolean_func_bool_impl(__MPyObj *args, __MPyObj *kwargs);
 
+__MPyObj* __mpy_boolean_func_int_impl(__MPyObj *args, __MPyObj *kwargs);
+
 __mpy_boolean_c_type __mpy_boolean_raw(__MPyObj *self);
 
 // compare

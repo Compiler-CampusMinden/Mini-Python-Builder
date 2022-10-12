@@ -6,6 +6,7 @@
 #include <string.h>
 
 #include "literals/boolean.h"
+#include "literals/int.h"
 #include "mpy_obj.h"
 #include "builtins-setup.h"
 #include "checks.h"
@@ -20,6 +21,7 @@ typedef struct __MPyStrContent {
     __MPyObj *strMethod;
     __MPyObj *boolMethod;
     __MPyObj *addMethod;
+    __MPyObj *intMethod;
     __MPyObj *eqMethod;
     __MPyObj *neMethod;
     __MPyObj *geMethod;
@@ -85,6 +87,27 @@ __MPyObj* __mpy_str_func_add_impl(__MPyObj *args, __MPyObj *kwargs) {
     __mpy_obj_ref_dec(self);
     __mpy_obj_ref_dec(other);
     return __mpy_obj_return(result);
+}
+
+__MPyObj *__mpy_str_func_int_impl(__MPyObj *args, __MPyObj *kwargs) {
+    assert(args != NULL && kwargs != NULL);
+
+    __MPyGetArgsState argHelper = __mpy_args_init("str.__int__", args, kwargs, 1);
+    __MPyObj *self = __mpy_args_get_positional(&argHelper, 0, "self");
+    __mpy_args_finish(&argHelper);
+
+    const char *value = ((__MPyStrContent*)self->content)->string;
+
+    char *error_pointer;
+    long long int_value;
+
+    int_value = strtol(value,&error_pointer,0);
+
+    if (*error_pointer != 0) {
+    fprintf(stderr, "ParseError: in function str.__int__ with string '%s' at position '%s'.\n", value, error_pointer);
+        __mpy_fatal_error(__MPY_ERROR_USER);
+    }
+    return __mpy_obj_return(__mpy_obj_init_int(int_value));
 }
 
 __MPyObj *__mpy_str_func_eq_impl(__MPyObj *args, __MPyObj *kwargs) {
@@ -246,6 +269,9 @@ __MPyObj* __mpy_str_get_attr_impl(__MPyObj *self, const char *name) {
     if (strcmp("__add__", name) == 0) {
         return ((__MPyStrContent*)self->content)->addMethod;
     }
+    if (strcmp("__int__", name) == 0) {
+        return ((__MPyStrContent*)self->content)->intMethod;
+    }
 
     //comparing
     if (strcmp("__eq__", name) == 0) {
@@ -293,6 +319,7 @@ __MPyObj* __mpy_obj_init_str_static(const char *string) {
     content->boolMethod = __mpy_bind_func(__MPyFunc_Str_bool, self);
     content->strMethod = __mpy_bind_func(__MPyFunc_Str_str, self);
     content->addMethod = __mpy_bind_func(__MPyFunc_Str_add, self);
+    content->intMethod = __mpy_bind_func(__MPyFunc_Str_int, self);
 
 // comparing
     content->eqMethod = __mpy_bind_func(__MPyFunc_Str_eq, self);

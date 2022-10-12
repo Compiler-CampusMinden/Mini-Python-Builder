@@ -9,12 +9,14 @@
 #include "errors.h"
 #include "function-args.h"
 #include "literals/str.h"
+#include "literals/int.h"
 #include "type-hierarchy/bound-method.h"
 
 typedef struct MPyBooleanContent {
     __mpy_boolean_c_type value;
     __MPyObj *strMethod;
     __MPyObj *boolMethod;
+    __MPyObj *intMethod;
     __MPyObj *eqMethod;
     __MPyObj *neMethod;
 } MPyBooleanContent;
@@ -33,6 +35,9 @@ __MPyObj* __mpy_boolean_get_attr_impl(__MPyObj *self, const char *name) {
     if (strcmp("__bool__", name) == 0) {
         return ((MPyBooleanContent*) self->content)->boolMethod;
     }
+    if (strcmp("__int__", name) == 0) {
+        return ((MPyBooleanContent*) self->content)->intMethod;
+    }
 
 // compare
     if (strcmp("__eq__", name) == 0) {
@@ -49,6 +54,7 @@ void boolean_cleanup(__MPyObj *self) {
 
     __mpy_obj_ref_dec(content->strMethod);
     __mpy_obj_ref_dec(content->boolMethod);
+    __mpy_obj_ref_dec(content->intMethod);
     __mpy_obj_ref_dec(content->eqMethod);
     __mpy_obj_ref_dec(content->neMethod);
 }
@@ -65,6 +71,7 @@ __MPyObj* __mpy_obj_init_boolean(__mpy_boolean_c_type value) {
     content->value = value;
     content->strMethod = __mpy_bind_func(__MPyFunc_Boolean_str, obj);
     content->boolMethod = __mpy_bind_func(__MPyFunc_Boolean_bool, obj);
+    content->intMethod = __mpy_bind_func(__MPyFunc_Boolean_int, obj);
 
     content->eqMethod = __mpy_bind_func(__MPyFunc_Boolean_eq, obj);
     content->neMethod = __mpy_bind_func(__MPyFunc_Boolean_ne, obj);
@@ -103,6 +110,15 @@ __MPyObj* __mpy_boolean_func_bool_impl(__MPyObj *args, __MPyObj *kwargs) {
     // since bools are immutable: simply return self
 
     return __mpy_obj_return(self);
+}
+
+__MPyObj* __mpy_boolean_func_int_impl(__MPyObj *args, __MPyObj *kwargs) {
+    __MPyGetArgsState argHelper = __mpy_args_init("bool.__int__", args, kwargs, 1);
+    __MPyObj *self = __mpy_args_get_positional(&argHelper, 0, "self");
+    __mpy_args_finish(&argHelper);
+
+    __mpy_boolean_c_type value = ((MPyBooleanContent*)self->content)->value;
+    return __mpy_obj_return(__mpy_obj_init_int(value));
 }
 
 __MPyObj* __mpy_boolean_func_eq_impl(__MPyObj *args, __MPyObj *kwargs) {

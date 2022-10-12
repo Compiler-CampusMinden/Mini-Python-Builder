@@ -15,6 +15,8 @@ __MPyObj *__mpy_str_func_bool_impl(__MPyObj *args, __MPyObj *kwargs);
 
 __MPyObj *__mpy_str_func_add_impl(__MPyObj *args, __MPyObj *kwargs);
 
+__MPyObj *__mpy_str_func_int_impl(__MPyObj *args, __MPyObj *kwargs);
+
 // comparing
 __MPyObj *__mpy_str_func_eq_impl(__MPyObj *args, __MPyObj *kwargs);
 __MPyObj *__mpy_str_func_ne_impl(__MPyObj *args, __MPyObj *kwargs);
