@@ -5,6 +5,11 @@ package CBuilder;
  */
 public interface Statement {
 
+    /**
+     * Create the C-Code of the representing statement.
+     *
+     * @return A String which represents the c-code of the statement.
+     */
     String buildStatement();
 
 }

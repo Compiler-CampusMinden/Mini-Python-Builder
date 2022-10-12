@@ -13,11 +13,23 @@ import java.util.Map;
  */
 public class Call implements Expression {
 
+    /**
+     * The positional arguments of the call.
+     */
     private List<Expression> args;
+
+    /**
+     * The keyword arguments of the call.
+     */
     private Map<String, Expression> kwargs;
+
+    /**
+     * The callable object, i. e. a type or a function.
+     */
     private Expression callable;
 
     /**
+     * Create a new call.
      *
      * @param callable The callable object, i. e. a type or a function.
      * @param args The positional arguments of the call.

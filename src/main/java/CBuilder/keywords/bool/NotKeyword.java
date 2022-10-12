@@ -7,10 +7,21 @@ import CBuilder.objects.Call;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A boolean not operation (Python/MiniPython).
+ */
 public class NotKeyword implements Expression {
 
+    /**
+     * The boolean expression to negate.
+     */
     private Expression x;
 
+    /**
+     * Create a new boolean not operation.
+     *
+     * @param x The boolean expression to negate.
+     */
     public NotKeyword(Expression x) {
         this.x = x;
     }

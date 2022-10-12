@@ -6,7 +6,9 @@ package CBuilder;
 public interface Expression extends Statement {
 
     /**
-     * @return C-code that evaluates to a MiniPython object.
+     * Create the c-code of the representing expression.
+     *
+     * @return A String with the c-code that evaluates to the containing MiniPython object.
      */
     String buildExpression();
 

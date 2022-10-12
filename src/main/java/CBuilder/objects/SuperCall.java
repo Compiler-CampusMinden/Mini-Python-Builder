@@ -8,6 +8,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Create a new super call for a class definition.
+ * All classes need to call super since they inherit from '__MPyType_Object'.
+ * The super call need to be the first statement of '__init__' method.
+ */
 public class SuperCall extends Call {
 
     // addAll does not return `this`,
@@ -22,6 +27,8 @@ public class SuperCall extends Call {
     }
 
     /**
+     * Create a new super call.
+     *
      * @param args     The positional arguments of the parent class constructor.
      * @param kwargs   The keyword arguments of the parent class constructor.
      */

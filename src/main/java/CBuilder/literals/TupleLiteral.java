@@ -4,10 +4,21 @@ import CBuilder.Expression;
 
 import java.util.List;
 
+/**
+ * A simple tuple literal.
+ */
 public class TupleLiteral implements Literal {
 
+    /**
+     * The list of values the tuple is containing.
+     */
     private final List<Expression> elems;
 
+    /**
+     * Create a new tuple literal with the specified values.
+     *
+     * @param elems A list of values the tuple should contain.
+     */
     public TupleLiteral(List<Expression> elems) {
         this.elems = elems;
     }

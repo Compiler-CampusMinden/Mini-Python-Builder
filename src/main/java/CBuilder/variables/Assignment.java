@@ -13,13 +13,15 @@ public class Assignment implements Statement {
      * The name of the variable.
      */
     private final Reference lhs;
+
     /**
      * The new value of the variable.
      */
     private final Expression rhs;
 
     /**
-     * Create a new assignment that assigns <code>rhs</code> to <code>lhs</code>.
+     * Create a new assignment that assigns a value to a variable.
+     *
      * @param lhs The name of the variable to assign to.
      * @param rhs The value to assign.
      */
@@ -28,9 +30,6 @@ public class Assignment implements Statement {
         this.rhs = rhs;
     }
 
-    /**
-     * @return Code to perform the assignment.
-     */
     @Override
     public String buildStatement() {
         String rhs = this.rhs.buildExpression();

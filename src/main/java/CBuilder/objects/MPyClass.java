@@ -13,12 +13,24 @@ import java.util.stream.Collectors;
  */
 public class MPyClass extends Reference {
 
+    /**
+     * The reference to the parent class.
+     */
     private final Reference parent;
 
+    /**
+     * The list of methods the class contains.
+     */
     private final List<Function> functions;
+
+    /**
+     * The list of static attributes the class contains.
+     */
     private final Map<Reference, Expression> classAttributes;
 
     /**
+     * Create a new class definition.
+     *
      * @param name The type's name.
      * @param parent The parent class.
      * @param functions The associated functions and methods.
@@ -31,6 +43,11 @@ public class MPyClass extends Reference {
         this.classAttributes = classAttributes;
     }
 
+    /**
+     * Create the c-code for object declaration of this class definition.
+     *
+     * @return A mini-python object declaration for this class definition.
+     */
     public String buildDeclaration() {
         StringBuilder declaration = new StringBuilder();
 
@@ -45,6 +62,11 @@ public class MPyClass extends Reference {
         return declaration.toString();
     }
 
+    /**
+     * Create the c-code for initialization of the class definition object.
+     *
+     * @return Initialisation code for this class definition object.
+     */
     public String buildInitialisation() {
         StringBuilder init = new StringBuilder();
 
@@ -79,6 +101,11 @@ public class MPyClass extends Reference {
         return init.toString();
     }
 
+    /**
+     * Create the c-code for cleaning up the class definition object.
+     *
+     * @return Cleanup code for collecting this class definition object.
+     */
     public String buildRefDec() {
         return "__mpy_obj_ref_dec(" + name + ");\n";
     }

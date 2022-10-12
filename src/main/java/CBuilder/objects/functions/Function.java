@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 /**
  * Mini-Python function declaration.
- *
  * Implements the Reference interface to allow using instances for referring to the declaration too.
  */
 public class Function extends Reference {
@@ -56,7 +55,9 @@ public class Function extends Reference {
     }
 
     /**
-     * @return The C function implementing this mini-python function.
+     * Create the c-code representation for the function.
+     *
+     * @return The c-code of the  function implementing this mini-python function.
      */
     public String buildCFunction() {
         StringBuilder declaration = new StringBuilder();
@@ -117,6 +118,8 @@ public class Function extends Reference {
     }
 
     /**
+     * Create the c-code for object declaration of this function.
+     *
      * @return A mini-python object declaration for this function.
      */
     public String buildFuncObjectDeclaration() {
@@ -124,6 +127,8 @@ public class Function extends Reference {
     }
 
     /**
+     * Create the c-code for initialization of the function's mini-python object.
+     *
      * @return Initialisation code for this function's mini-python object.
      */
     public String buildInitialisation() {
@@ -132,6 +137,8 @@ public class Function extends Reference {
     }
 
     /**
+     * Create the c-code for cleaning up the function object.
+     *
      * @return Cleanup code for collecting this function's mini-python object.
      */
     public String buildRefDec() {

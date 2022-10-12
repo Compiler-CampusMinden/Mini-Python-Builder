@@ -6,9 +6,9 @@ import CBuilder.conditions.IfThenElseStatement;
 import java.util.List;
 
 /**
- * The else part of an {@link IfThenElseStatement}.
+ * An else block (Python/MiniPython) of a conditional statement.
  *
- * @see IfThenElseStatement How to utilise this to generate code.
+ * @see IfThenElseStatement How to utilise this
  */
 public class ElseStatement implements Statement {
 
@@ -18,6 +18,11 @@ public class ElseStatement implements Statement {
         this.body = body;
     }
 
+    /**
+     * Generate the c-code of the representing else block.
+     *
+     * @return A string which containing the c-code representation of the else block.
+     */
     public String build() {
         StringBuilder statement = new StringBuilder();
 

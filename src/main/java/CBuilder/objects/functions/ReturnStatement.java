@@ -19,9 +19,6 @@ public class ReturnStatement implements Statement {
         this.returnValue = returnValue;
     }
 
-    /**
-     * @return C code to return returnValue from the current function
-     */
     @Override
     public String buildStatement() {
         // Note: retVal and goto ret depend on the implementation of Function#buildCFunction

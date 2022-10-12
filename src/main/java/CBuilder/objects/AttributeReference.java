@@ -8,10 +8,19 @@ import CBuilder.Reference;
  */
 public class AttributeReference implements Expression {
 
+    /**
+     * The name of the attribute the reference should point to.
+     */
     private String name;
+
+    /**
+     * The object which containing the referenced attribute.
+     */
     private Expression object;
 
     /**
+     * Create a new attribute reference for the given object.
+     *
      * Example:
      * ```
      * a = 1
@@ -19,17 +28,27 @@ public class AttributeReference implements Expression {
      * ```
      *
      * @param name The name of the reference.
-     * @param object The object to retrieve the reference from
+     * @param object The object to retrieve the reference from.
      */
     public AttributeReference(String name, Expression object) {
         this.name = name;
         this.object = object;
     }
 
+    /**
+     * Create the c-code of the attribute name.
+     *
+     * @return The c-code which represents the attribute name.
+     */
     protected String buildName() {
         return "\"" + name + "\"";
     }
 
+    /**
+     * Create the c-code of the object.
+     *
+     * @return The c-code which represents the object.
+     */
     protected String buildObject() {
         return object.buildExpression();
     }
@@ -44,5 +63,10 @@ public class AttributeReference implements Expression {
         return buildExpression() + ";\n";
     }
 
+    /**
+     * Get the attribute name.
+     *
+     * @return The name of the attribute.
+     */
     public String getName() { return this.name; }
 }

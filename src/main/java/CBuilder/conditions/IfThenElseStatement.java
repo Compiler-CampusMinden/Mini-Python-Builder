@@ -13,16 +13,27 @@ import java.util.Optional;
  */
 public class IfThenElseStatement implements Statement {
 
+    /**
+     * The containing if block.
+     */
     private IfStatement ifStatement;
+
+    /**
+     * A list of the containing elif blocks.
+     */
     private Optional<List<ElifStatement>> elifStatements;
+
+    /**
+     * The containing else block.
+     */
     private Optional<ElseStatement> elseStatement;
 
     /**
      * Create a new if/elif/else block.
      *
-     * @param ifStatement The if condition & body.
-     * @param elifStatements Optional elif conditions & bodies.
-     * @param elseStatement Optional else condition & body.
+     * @param ifStatement The if statement.
+     * @param elifStatements An optional list of elif statements.
+     * @param elseStatement An optional else statement.
      */
     public IfThenElseStatement(IfStatement ifStatement, Optional<List<ElifStatement>> elifStatements, Optional<ElseStatement> elseStatement) {
         this.ifStatement = ifStatement;

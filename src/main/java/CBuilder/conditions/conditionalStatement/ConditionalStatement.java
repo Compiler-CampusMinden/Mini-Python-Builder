@@ -13,16 +13,39 @@ import java.util.Map;
  */
 class ConditionalStatement implements Statement {
 
+    /**
+     * The keyword of the representing conditional statement.
+     */
     private String keyword;
+
+    /**
+     * The condition of the representing conditional statement.
+     */
     private Expression condition;
+
+    /**
+     * A List of all statements in the body of the conditional statement.
+     */
     private List<Statement> body;
 
+    /**
+     * Create a new conditional statement block.
+     *
+     * @param keyword The keyword of the representing conditional statement.
+     * @param condition The condition of the representing conditional statement.
+     * @param body A List of all statements in the body of the conditional statement.
+     */
     public ConditionalStatement(String keyword, Expression condition, List<Statement> body) {
         this.keyword = keyword;
         this.condition = condition;
         this.body = body;
     }
 
+    /**
+     * Generate the c-code of the representing conditional statement.
+     *
+     * @return A string which containing the c-code representation of the conditional statement.
+     */
     public String build() {
         StringBuilder string = new StringBuilder();
 

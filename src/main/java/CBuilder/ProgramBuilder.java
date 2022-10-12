@@ -21,6 +21,9 @@ import java.util.stream.Collectors;
  */
 public class ProgramBuilder {
 
+    /**
+     * Definition of the c-runtime header files.
+     */
     private static final String[] headers = {
             // allow usage of assertions
             "assert",
@@ -41,15 +44,29 @@ public class ProgramBuilder {
             "type-hierarchy/type",
     };
 
+    /**
+     * A list of all statements in the global scope.
+     */
     private final List<Statement> statements;
+
+    /**
+     * A list of all defined variables in the global scope.
+     */
     private final List<VariableDeclaration> globalVariables;
 
+    /**
+     * A list of all defined functions in the global scope.
+     */
     private final List<Function> globalFunctions;
 
+    /**
+     * A list of all defined classes in th global scope.
+     */
     private final List<MPyClass> classes;
 
     /**
-     * Allows to manually specify options regarding C code generation.
+     * Create a new program with empty global scope.
+     * Allows to manually specify options regarding c-code generation.
      */
     public ProgramBuilder() {
         statements = new LinkedList<>();
@@ -59,9 +76,9 @@ public class ProgramBuilder {
     }
 
     /**
-     * Add a new statement in the global scope.
-     *
+     * Add a new statement to the global scope.
      * The resulting statement list more or less represents the program's main method.
+     *
      * @param statement The statement to add.
      */
     public void addStatement(Statement statement) {
@@ -73,18 +90,38 @@ public class ProgramBuilder {
         statements.add(statement);
     }
 
+    /**
+     * Add a new variable to the global scope.
+     *
+     * @param variable The variable to add.
+     */
     public void addVariable(VariableDeclaration variable) {
         globalVariables.add(variable);
     }
 
+    /**
+     * Add a new function definition to the global scope.
+     *
+     * @param function The function to add.
+     */
     public void addFunction(Function function) {
         globalFunctions.add(function);
     }
 
+    /**
+     * Add a new class definition to the global scope.
+     *
+     * @param mPyClass The class to add.
+     */
     public void addClass(MPyClass mPyClass) {
         classes.add(mPyClass);
     }
 
+    /**
+     * Generate a c-program of the containing elements.
+     *
+     * @return A string which containing the generated c-program.
+     */
     public String buildProgram() {
         StringBuilder program = new StringBuilder();
 
@@ -172,6 +209,12 @@ public class ProgramBuilder {
         return program.toString();
     }
 
+    /**
+     * Write the c-program into the output file.
+     * Additionally copies the c-runtime into output path.
+     *
+     * @param directory The directory which containing the c-runtime.
+     */
     public void writeProgram(Path directory) {
         try {
             if (getClass().getResource("/c-runtime").toURI().getScheme().equals("file")) {
@@ -194,6 +237,14 @@ public class ProgramBuilder {
         }
     }
 
+    /**
+     * Copy the c-runtime folder from jar into the target location.
+     *
+     * @param resourcePath The Path to the jar archive.
+     * @param targetLocation The output directory.
+     * @throws URISyntaxException Will be thrown if the c-runtime can not be found in the application resources.
+     * @throws IOException Will be thrown if a needed file or folder is not accessible.
+     */
     public void copyFolderFromJar(String resourcePath, final Path targetLocation) throws URISyntaxException, IOException {
         URI resource = getClass().getResource("/c-runtime").toURI();
 

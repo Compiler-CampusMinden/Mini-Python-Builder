@@ -1,30 +1,30 @@
 package CBuilder.literals;
 
 /**
- * A number.
+ * A simple integer literal.
  */
 public class IntLiteral implements Literal {
 
     /**
-     * The value itself.
+     * The containing integer value.
      */
     long value;
 
     /**
-     * Create a new literal with the specified value.
-     * @param value The new value.
+     * Create a new integer literal with the specified value.
+     *
+     * @param value The integer value to use.
      */
     public IntLiteral(long value) {
         this.value = value;
     }
 
-    /**
-     * @return The C representation of a MiniPython object with the initially specified value.
-     */
+    @Override
     public String buildExpression() {
         return "__mpy_obj_init_int(" + value + ")";
     }
 
+    @Override
     public String buildStatement() {
         return buildExpression() + ";\n";
     }

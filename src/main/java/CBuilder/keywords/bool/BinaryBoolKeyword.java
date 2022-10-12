@@ -7,12 +7,33 @@ import CBuilder.objects.Call;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Represents a boolean operation with a left and a right expression.
+ */
 class BinaryBoolKeyword implements Expression {
 
+    /**
+     * The representing operator in c.
+     */
     private String cOp;
+
+    /**
+     * The operations left expression.
+     */
     private Expression x;
+
+    /**
+     * The operations right expression.
+     */
     private Expression y;
 
+    /**
+     * Create a new boolean operation.
+     *
+     * @param cOp The representing operator in c.
+     * @param x The operations left expression.
+     * @param y The operations right expression.
+     */
     public BinaryBoolKeyword(String cOp, Expression x, Expression y) {
         this.cOp = cOp;
         this.x = x;
