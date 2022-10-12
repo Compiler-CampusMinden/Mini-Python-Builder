@@ -52,15 +52,63 @@ __MPyObj *__MPyFunc_Int_str;
 
 __MPyObj *__MPyFunc_Int_bool;
 
+__MPyObj *__MPyFunc_Int_add;
+
+__MPyObj *__MPyFunc_Int_sub;
+
+__MPyObj *__MPyFunc_Int_mul;
+
+__MPyObj *__MPyFunc_Int_div;
+
+__MPyObj *__MPyFunc_Int_lshift;
+
+__MPyObj *__MPyFunc_Int_rshift;
+
+__MPyObj *__MPyFunc_Int_and;
+
+__MPyObj *__MPyFunc_Int_xor;
+
+__MPyObj *__MPyFunc_Int_or;
+
+
+__MPyObj *__MPyFunc_Int_eq;
+
+__MPyObj *__MPyFunc_Int_ne;
+
+__MPyObj *__MPyFunc_Int_ge;
+
+__MPyObj *__MPyFunc_Int_le;
+
+__MPyObj *__MPyFunc_Int_gt;
+
+__MPyObj *__MPyFunc_Int_lt;
+
+
 __MPyObj *__MPyFunc_Tuple_bool;
 
 __MPyObj *__MPyFunc_Str_str;
 
 __MPyObj *__MPyFunc_Str_bool;
 
+__MPyObj *__MPyFunc_Str_add;
+
+// compare strings
+__MPyObj *__MPyFunc_Str_eq;
+__MPyObj *__MPyFunc_Str_ne;
+__MPyObj *__MPyFunc_Str_ge;
+__MPyObj *__MPyFunc_Str_le;
+__MPyObj *__MPyFunc_Str_gt;
+__MPyObj *__MPyFunc_Str_lt;
+
+
 __MPyObj *__MPyFunc_Boolean_str;
 
 __MPyObj *__MPyFunc_Boolean_bool;
+
+// compare boolean
+__MPyObj *__MPyFunc_Boolean_eq;
+__MPyObj *__MPyFunc_Boolean_ne;
+
 
 __MPyObj *__MPyFunc_Object_str;
 
@@ -113,11 +161,47 @@ void __mpy_builtins_setup() {
     __MPyFunc_Type_call = __mpy_obj_init_func(&__mpy_type_func_call_impl);
     __mpy_obj_ref_inc(__MPyFunc_Type_call);
 
-    __MPyFunc_Int_str = __mpy_obj_init_func(&__mpy_int_func_str_impl);
-    __mpy_obj_ref_inc(__MPyFunc_Int_str);
+#define init_int_func(purpose) \
+    __MPyFunc_Int_ ## purpose = __mpy_obj_init_func(&__mpy_int_func_ ## purpose ## _impl); \
+    __mpy_obj_ref_inc(__MPyFunc_Int_ ## purpose);
 
-    __MPyFunc_Int_bool = __mpy_obj_init_func(&__mpy_int_func_bool_impl);
-    __mpy_obj_ref_inc(__MPyFunc_Int_bool);
+    init_int_func(str);
+
+    init_int_func(bool);
+
+    init_int_func(add);
+
+    init_int_func(sub);
+
+    init_int_func(mul);
+
+    init_int_func(div);
+
+    init_int_func(lshift);
+
+    init_int_func(rshift);
+
+    init_int_func(and);
+
+    init_int_func(or);
+
+    init_int_func(xor);
+
+
+    init_int_func(eq);
+
+    init_int_func(ne);
+
+    init_int_func(ge);
+
+    init_int_func(le);
+
+    init_int_func(gt);
+
+    init_int_func(lt);
+
+
+#undef init_int_func
 
     __MPyFunc_Tuple_bool = __mpy_obj_init_func(&__mpy_tuple_func_bool_impl);
     __mpy_obj_ref_inc(__MPyFunc_Tuple_bool);
@@ -128,11 +212,34 @@ void __mpy_builtins_setup() {
     __MPyFunc_Str_bool = __mpy_obj_init_func(&__mpy_str_func_bool_impl);
     __mpy_obj_ref_inc(__MPyFunc_Str_bool);
 
+    __MPyFunc_Str_add = __mpy_obj_init_func(&__mpy_str_func_add_impl);
+    __mpy_obj_ref_inc(__MPyFunc_Str_add);
+
+// comparing string
+    __MPyFunc_Str_eq = __mpy_obj_init_func(&__mpy_str_func_eq_impl);
+    __mpy_obj_ref_inc(__MPyFunc_Str_eq);
+    __MPyFunc_Str_ne = __mpy_obj_init_func(&__mpy_str_func_ne_impl);
+    __mpy_obj_ref_inc(__MPyFunc_Str_ne);
+    __MPyFunc_Str_ge = __mpy_obj_init_func(&__mpy_str_func_ge_impl);
+    __mpy_obj_ref_inc(__MPyFunc_Str_ge);
+    __MPyFunc_Str_le = __mpy_obj_init_func(&__mpy_str_func_le_impl);
+    __mpy_obj_ref_inc(__MPyFunc_Str_le);
+    __MPyFunc_Str_gt = __mpy_obj_init_func(&__mpy_str_func_gt_impl);
+    __mpy_obj_ref_inc(__MPyFunc_Str_gt);
+    __MPyFunc_Str_lt = __mpy_obj_init_func(&__mpy_str_func_lt_impl);
+    __mpy_obj_ref_inc(__MPyFunc_Str_lt);
+
     __MPyFunc_Boolean_bool = __mpy_obj_init_func(&__mpy_boolean_func_bool_impl);
     __mpy_obj_ref_inc(__MPyFunc_Boolean_bool);
 
     __MPyFunc_Boolean_str = __mpy_obj_init_func(&__mpy_boolean_func_str_impl);
     __mpy_obj_ref_inc(__MPyFunc_Boolean_str);
+
+// comparing boolean
+    __MPyFunc_Boolean_eq = __mpy_obj_init_func(&__mpy_boolean_func_eq_impl);
+    __mpy_obj_ref_inc(__MPyFunc_Boolean_eq);
+    __MPyFunc_Boolean_ne = __mpy_obj_init_func(&__mpy_boolean_func_ne_impl);
+    __mpy_obj_ref_inc(__MPyFunc_Boolean_ne);
 
     __MPyFunc_Object_str = __mpy_obj_init_func(&__mpy_object_func_str_impl);
     __mpy_obj_ref_inc(__MPyFunc_Object_str);
@@ -222,6 +329,8 @@ void __mpy_builtins_cleanup() {
     __mpy_obj_ref_dec(__MPyFunc_Int_str);
 
     __mpy_obj_ref_dec(__MPyFunc_Str_str);
+
+    __mpy_obj_ref_dec(__MPyFunc_Str_add);
 
     __mpy_obj_ref_inc(__MPyFunc_Boolean_bool);
 

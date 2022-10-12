@@ -35,15 +35,63 @@ extern __MPyObj *__MPyFunc_Int_str;
 
 extern __MPyObj *__MPyFunc_Int_bool;
 
+extern __MPyObj *__MPyFunc_Int_add;
+
+extern __MPyObj *__MPyFunc_Int_sub;
+
+extern __MPyObj *__MPyFunc_Int_mul;
+
+extern __MPyObj *__MPyFunc_Int_div;
+
+extern __MPyObj *__MPyFunc_Int_lshift;
+
+extern __MPyObj *__MPyFunc_Int_rshift;
+
+extern __MPyObj *__MPyFunc_Int_and;
+
+extern __MPyObj *__MPyFunc_Int_xor;
+
+extern __MPyObj *__MPyFunc_Int_or;
+
+
+extern __MPyObj *__MPyFunc_Int_eq;
+
+extern __MPyObj *__MPyFunc_Int_ne;
+
+extern __MPyObj *__MPyFunc_Int_ge;
+
+extern __MPyObj *__MPyFunc_Int_le;
+
+extern __MPyObj *__MPyFunc_Int_gt;
+
+extern __MPyObj *__MPyFunc_Int_lt;
+
+
 extern __MPyObj *__MPyFunc_Tuple_bool;
 
 extern __MPyObj *__MPyFunc_Str_str;
 
 extern __MPyObj *__MPyFunc_Str_bool;
 
+extern __MPyObj *__MPyFunc_Str_add;
+
+// comparing
+extern __MPyObj *__MPyFunc_Str_eq;
+extern __MPyObj *__MPyFunc_Str_ne;
+extern __MPyObj *__MPyFunc_Str_ge;
+extern __MPyObj *__MPyFunc_Str_le;
+extern __MPyObj *__MPyFunc_Str_gt;
+extern __MPyObj *__MPyFunc_Str_lt;
+
+
 extern __MPyObj *__MPyFunc_Boolean_str;
 
 extern __MPyObj *__MPyFunc_Boolean_bool;
+
+// compare boolean
+extern __MPyObj *__MPyFunc_Boolean_eq;
+extern __MPyObj *__MPyFunc_Boolean_ne;
+
 
 extern __MPyObj *__MPyFunc_Object_str;
 

@@ -17,9 +17,11 @@ __MPyObj* inject_self_into_args(__MPyObj *args, __MPyObj *self) {
     unsigned int argCnt = __mpy_tuple_size(args);
     __MPyObj *initArgs = __mpy_obj_init_tuple(argCnt + 1);
     __mpy_tuple_assign(0, self, initArgs);
-    for (unsigned int i = 1; i < argCnt; i++) {
+
+    for (unsigned int i = 1; i <= argCnt; i++) {
         __mpy_tuple_assign(i, __mpy_tuple_get_at(args, i - 1), initArgs);
     }
+
     __mpy_obj_ref_dec(args);
 
     return initArgs;
@@ -48,7 +50,7 @@ __MPyObj* __mpy_call(__MPyObj *callable, __MPyObj *args, __MPyObj *kwargs) {
         __MPY_NOTE("(bug) not injecting self into kwargs");
 
         return __mpy_call(func, callArgs, kwargs);
-    } 
+    }
 
     if (callable->type == __MPyType_Type) {
         __MPyObj *fnNew = __mpy_obj_get_attr(callable, "__new__");
@@ -57,7 +59,7 @@ __MPyObj* __mpy_call(__MPyObj *callable, __MPyObj *args, __MPyObj *kwargs) {
 
         // make newObj non-temporary for the call to init
         // so it is not cleaned up there
-        __mpy_obj_ref_inc(newObj); 
+        __mpy_obj_ref_inc(newObj);
 
         /* __MPyObj *initArgs = inject_self_into_args(args, newObj); */
         __MPY_NOTE("(bug) not injecting self into kwargs");

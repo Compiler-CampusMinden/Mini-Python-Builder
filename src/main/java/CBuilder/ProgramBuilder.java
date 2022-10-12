@@ -35,6 +35,7 @@ public class ProgramBuilder {
             "literals/tuple",
             "literals/int",
             "literals/boolean",
+            "literals/str",
             "type-hierarchy/object",
             // custom objects
             "type-hierarchy/type",

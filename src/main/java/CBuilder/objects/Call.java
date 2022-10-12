@@ -1,6 +1,7 @@
 package CBuilder.objects;
 
 import CBuilder.Expression;
+import CBuilder.literals.TupleLiteral;
 
 import java.util.List;
 import java.util.Map;
@@ -31,20 +32,15 @@ public class Call implements Expression {
     @Override
     public String buildExpression() {
 
-        // first pack arguments
-        StringBuilder packedArguments = new StringBuilder();
-        for (int i = 0; i < args.size(); i++) {
-            packedArguments.append("__mpy_tuple_assign(" + i + ", " + args.get(i).buildExpression() + ", ");
-        }
-        packedArguments.append("__mpy_obj_init_tuple(" + args.size() + ")");
-        packedArguments.append(")".repeat(args.size()));
+        // first pack arguments, i.e. put them into a tuple
+        TupleLiteral packedArguments = new TupleLiteral(args);
 
         // then keyword arguments
         // FIXME unimplemented
 
         // finally: call
         // FIXME replace NULL with keyword arguments
-        return "__mpy_call(" + callable.buildExpression() + ", " + packedArguments + ", NULL)";
+        return "__mpy_call(" + callable.buildExpression() + ", " + packedArguments.buildExpression() + ", NULL)";
     }
 
     @Override
