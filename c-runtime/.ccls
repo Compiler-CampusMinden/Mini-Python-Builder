@@ -1,6 +1,0 @@
-clang
--I./include
--std=c11
--Wall
--Werror
--pedantic

@@ -1,7 +1,0 @@
-CompileFlags:
-  Add: [-Wextra]
-  Remove: []
-Diagnostics:
-  ClangTidy:
-    Add: ['*']
-    Remove: [bugprone-reserved-identifier,cert-dcl37-c,cert-dcl51-cpp,altera*]
