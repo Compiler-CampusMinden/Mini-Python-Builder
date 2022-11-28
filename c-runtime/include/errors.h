@@ -3,7 +3,11 @@
 
 #include <stdio.h>
 
+#ifdef DEBUG
 #define __MPY_NOTE(msg) fprintf(stderr, "NOTE(%s:%i): %s\n", __FILE__, __LINE__, msg);
+#else
+#define __MPY_NOTE(msg)
+#endif
 
 #define __MPY_TODO(msg) fprintf(stderr, "TODO(%s:%i): %s\n", __FILE__, __LINE__, msg);\
     __mpy_fatal_error(__MPY_ERROR_UNIMPLEMENTED);
