@@ -72,6 +72,10 @@ $(OBJECT) : $(OUTDIR)/%.o: $(SRCDIR)/%.c
 	$(if $(wildcard $(dir $@)),,$(MKDIR_P) $(dir $@))
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
+.PHONY: run
+run: $(BIN)
+	./bin/program
+
 .PHONY: clean
 clean:
 	$(RM) -r $(BIN) $(OBJECT) $(DEPENDENCY) $(wildcard $(DOCDIR)/*)
