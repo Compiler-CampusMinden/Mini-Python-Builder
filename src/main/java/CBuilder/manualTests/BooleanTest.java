@@ -59,19 +59,19 @@ public class BooleanTest {
         builder.addStatement(new Call(new Reference("print"), List.of(new Expression[] {
            new Reference("a"),
            new Reference("b"),
-        }), Map.of()));
+        })));
         builder.addStatement(new Call(new Reference("print"), List.of(new Expression[] {
             new Reference("a"),
-            }), Map.of()));
+            })));
         builder.addStatement(new Call(new Reference("print"), List.of(new Expression[] {
             new Reference("b"),
-            }), Map.of()));
+            })));
         builder.addStatement(new Call(new Reference("print"), List.of(new Expression[] {
             new Reference("a"),
-            }), Map.of()));
+            })));
         builder.addStatement(new Call(new Reference("print"), List.of(new Expression[] {
             new Reference("b"),
-            }), Map.of()));
+            })));
 
         builder.writeProgram(output);
     }

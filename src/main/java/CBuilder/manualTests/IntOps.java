@@ -26,8 +26,8 @@ public class IntOps {
         builder.addStatement(new Call(funcPrint, List.of(new Expression[]{
             new Call(new AttributeReference("__xor__", varA), List.of(new Expression[]{
                 new IntLiteral(12),
-            }), null)
-        }), null));
+            }))
+        })));
 
         builder.writeProgram(output);
     }

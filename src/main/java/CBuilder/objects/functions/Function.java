@@ -39,18 +39,16 @@ public class Function extends Reference {
      * @param uniqueName The C name for the function.
      * @param body The body of the function.
      * @param positionalArgs The arguments of the function.
-     * @param receivesPackedKeywordArgs Whether the function has an '**kwargs' parameter.
-     * @param receivesPackedPositionalArgs Whether the function has an '*args' parameter.
      * @param localVariables Variables declared inside the function.
      */
-    public Function(String funcName, String uniqueName, List<Statement> body, List<Argument> positionalArgs, boolean receivesPackedKeywordArgs, boolean receivesPackedPositionalArgs, List<VariableDeclaration> localVariables) {
+    public Function(String funcName, String uniqueName, List<Statement> body, List<Argument> positionalArgs, List<VariableDeclaration> localVariables) {
         super(funcName);
 
         this.uniqueName = uniqueName;
         this.body = body;
         this.positionalArgs = positionalArgs;
-        this.receivesPackedKeywordArgs = receivesPackedKeywordArgs;
-        this.receivesPackedPositionalArgs = receivesPackedPositionalArgs;
+        this.receivesPackedKeywordArgs = false;
+        this.receivesPackedPositionalArgs = false;
         this.localVariables = localVariables;
     }
 

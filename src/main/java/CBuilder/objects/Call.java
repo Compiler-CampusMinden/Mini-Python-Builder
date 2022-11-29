@@ -33,12 +33,11 @@ public class Call implements Expression {
      *
      * @param callable The callable object, i. e. a type or a function.
      * @param args The positional arguments of the call.
-     * @param kwargs The keyword arguments of the call.
      */
-    public Call(Expression callable, List<Expression> args, Map<String, Expression> kwargs) {
+    public Call(Expression callable, List<Expression> args) {
         this.callable = callable;
         this.args = args;
-        this.kwargs = kwargs;
+        this.kwargs = Map.of();
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Internal base for all conditional control structures that consist of a condition and a body following that condition.
  */
-class ConditionalStatement implements Statement {
+abstract class ConditionalStatement implements Statement {
 
     /**
      * The keyword of the representing conditional statement.
@@ -63,7 +63,7 @@ class ConditionalStatement implements Statement {
         string.append(keyword + " (");
 
         AttributeReference boolMethod = new AttributeReference("__bool__", condition);
-        Call boolCall = new Call(boolMethod, List.of(), Map.of());
+        Call boolCall = new Call(boolMethod, List.of());
 
         string.append("__mpy_boolean_raw(" + boolCall.buildExpression() + ")) {\n");
 

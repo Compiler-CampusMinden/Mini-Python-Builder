@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Represents a boolean operation with a left and a right expression.
  */
-class BinaryBoolKeyword implements Expression {
+abstract class BinaryBoolKeyword implements Expression {
 
     /**
      * The representing operator in c.
@@ -43,11 +43,11 @@ class BinaryBoolKeyword implements Expression {
     @Override
     public String buildExpression() {
         AttributeReference boolMethodX = new AttributeReference("__bool__", x);
-        Call boolCallX = new Call(boolMethodX, List.of(), Map.of());
+        Call boolCallX = new Call(boolMethodX, List.of());
         String boolX = "__mpy_boolean_raw(" + boolCallX.buildExpression() + ")";
 
         AttributeReference boolMethodY = new AttributeReference("__bool__", y);
-        Call boolCallY = new Call(boolMethodY, List.of(), Map.of());
+        Call boolCallY = new Call(boolMethodY, List.of());
         String boolY = "__mpy_boolean_raw(" + boolCallY.buildExpression() + ")";
 
         return "__mpy_obj_init_boolean(" + boolX + " " + cOp + " " + boolY + ")";

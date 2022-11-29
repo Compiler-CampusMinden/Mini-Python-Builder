@@ -30,10 +30,8 @@ public class SuperCall extends Call {
      * Create a new super call.
      *
      * @param args     The positional arguments of the parent class constructor.
-     * @param kwargs   The keyword arguments of the parent class constructor.
      */
-    public SuperCall(List<Expression> args,
-                     Map<String, Expression> kwargs) {
-        super(new Reference("__mpy_super"), chainedAddAll(List.of(new Reference("self")), args), kwargs);
+    public SuperCall(List<Expression> args) {
+        super(new Reference("__mpy_super"), chainedAddAll(List.of(new Reference("self")), args));
     }
 }

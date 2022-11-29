@@ -29,7 +29,7 @@ public class NotKeyword implements Expression {
     @Override
     public String buildExpression() {
         AttributeReference boolMethodX = new AttributeReference("__bool__", x);
-        Call boolCallX = new Call(boolMethodX, List.of(), Map.of());
+        Call boolCallX = new Call(boolMethodX, List.of());
         String boolX = "__mpy_boolean_raw(" + boolCallX.buildExpression() + ")";
 
         return "__mpy_obj_init_boolean(!" + boolX + ")";

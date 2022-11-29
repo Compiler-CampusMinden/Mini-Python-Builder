@@ -27,8 +27,8 @@ public class StrOps {
         builder.addStatement(new Call(funcPrint, List.of(new Expression[]{
             new Call(new AttributeReference("__eq__", varA), List.of(new Expression[]{
                 new StringLiteral("abc"),
-                }), null)
-        }), null));
+                }))
+        })));
 
         builder.writeProgram(output);
     }
