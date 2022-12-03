@@ -9,11 +9,12 @@ import java.util.stream.Collectors;
 
 /**
  * Mini-Python function declaration.
+ *
  * Implements the Reference interface to allow using instances for referring to the declaration too.
  */
 public class Function extends Reference {
 
-    private final String uniqueName;
+    private String cName;
     private final List<Statement> body;
     private final List<Argument> positionalArgs; // (a, b, c)
     // TODO default arguments (a=1)
@@ -24,27 +25,23 @@ public class Function extends Reference {
 
 
     /**
-     * Create a new function.
+     * Create a new function (or method).
      *
-     * Receives both funcName and unique name to fulfill requirements of both mini-python's duck typing
+     * Receives a funcName to fulfill requirements of both mini-python's duck typing
      * and the declaration of the native C function containing the functions' statements.
-     * Since C does not have namespaces, for declaring the function itself a globally unique name is needed.
-     * But to make duck typing work, function names that were equal in the original mini-python code
-     * need to be the same here too.
-     *
-     * By setting receivesPackedKeywordArgs or receivesPackedPositionalArgs to true,
-     * the functions arguments handling make 'args' and/or 'kwargs' variables available in the scope of the function.
+     * Since there are no namespaces in C, a globally unique name is required for the
+     * declaration of the function itself. For functions, funcName is used for this purpose;
+     * for methods, the class name is automatically added as a prefix to funcName once the
+     * class is created (MPyClass).
      *
      * @param funcName The mini-python name of the function.
-     * @param uniqueName The C name for the function.
      * @param body The body of the function.
      * @param positionalArgs The arguments of the function.
      * @param localVariables Variables declared inside the function.
      */
-    public Function(String funcName, String uniqueName, List<Statement> body, List<Argument> positionalArgs, List<VariableDeclaration> localVariables) {
+    public Function(String funcName, List<Statement> body, List<Argument> positionalArgs, List<VariableDeclaration> localVariables) {
         super(funcName);
-
-        this.uniqueName = uniqueName;
+        this.cName = funcName;
         this.body = body;
         this.positionalArgs = positionalArgs;
         this.receivesPackedKeywordArgs = false;
@@ -53,16 +50,35 @@ public class Function extends Reference {
     }
 
     /**
-     * Create the c-code representation for the function.
+     * Creates a unique method name used in emitted C code (auxiliary method, called by MPyClass)
      *
-     * @return The c-code of the  function implementing this mini-python function.
+     * A method is a function that can only be called in connection with its class. However,
+     * since a method is emitted just as a normal function in the C code, the method name must
+     * be extended with a prefix at C level and thus be made unique. The constructor of MPyClass
+     * handles this by calling this auxiliary method.
+     *
+     * <p> To call a method, use its name (funcName) and not its unique C name.
+     *
+     * <p>Warning: Do not use this helper method for functions, as functions are not allowed to
+     * have a different C name.
+     *
+     * @param prefix The prefix string which should be adde to the C name.
+     */
+    public void createUniqueCName(String prefix) {
+        cName = prefix + name;
+    }
+
+    /**
+     * Create the C code representation for the function.
+     *
+     * @return The C code of the  function implementing this mini-python function.
      */
     public String buildCFunction() {
         StringBuilder declaration = new StringBuilder();
 
         // FIXME args and kwargs probably breaks code that does not use the same names
         // for accessing packed arguments
-        declaration.append("__MPyObj* func_" + uniqueName + "(__MPyObj *args, __MPyObj *kwargs) {\n");
+        declaration.append("__MPyObj* func_" + cName + "(__MPyObj *args, __MPyObj *kwargs) {\n");
 
         StringBuilder body = new StringBuilder();
 
@@ -116,7 +132,7 @@ public class Function extends Reference {
     }
 
     /**
-     * Create the c-code for object declaration of this function.
+     * Create the C code for object declaration of this function.
      *
      * @return A mini-python object declaration for this function.
      */
@@ -125,17 +141,17 @@ public class Function extends Reference {
     }
 
     /**
-     * Create the c-code for initialization of the function's mini-python object.
+     * Create the C code for initialization of the function's mini-python object.
      *
      * @return Initialisation code for this function's mini-python object.
      */
     public String buildInitialisation() {
-        return name + " = __mpy_obj_init_func(&func_" + uniqueName +  ");\n" +
+        return name + " = __mpy_obj_init_func(&func_" + cName +  ");\n" +
                 "__mpy_obj_ref_inc(" + name + ");\n";
     }
 
     /**
-     * Create the c-code for cleaning up the function object.
+     * Create the C code for cleaning up the function object.
      *
      * @return Cleanup code for collecting this function's mini-python object.
      */

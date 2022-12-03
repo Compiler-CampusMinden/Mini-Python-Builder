@@ -28,12 +28,12 @@ public class ClassTest {
         Reference object = new Reference("__MPyType_Object");
 
         MPyClass clazz = new MPyClass("A", object, List.of(new Function[]{
-            new Function("foo", "foo1", List.of(new Expression[]{
+            new Function("foo", List.of(new Expression[]{
                 new Call(funcPrint, List.of(new Expression[]{
                     new StringLiteral("foo")
                 }))
             }), List.of(new Argument[]{new Argument("self", 0)}), List.of()),
-            new Function("__init__", "__init1_", List.of(new Expression[]{
+            new Function("__init__", List.of(new Expression[]{
                 new SuperCall(List.of())
             }), List.of(new Argument[]{new Argument("self", 0)}), List.of())
         }), Map.of());

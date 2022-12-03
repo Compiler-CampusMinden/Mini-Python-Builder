@@ -41,6 +41,7 @@ public class MPyClass extends Reference {
         this.parent = parent;
         this.functions = functions;
         this.classAttributes = classAttributes;
+        this.functions.forEach(func -> func.createUniqueCName(this.name + "_"));
     }
 
     /**

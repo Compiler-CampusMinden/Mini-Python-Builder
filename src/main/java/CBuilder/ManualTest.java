@@ -10,7 +10,6 @@ import CBuilder.variables.VariableDeclaration;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Allows to test the Builder without involving the ast or anything.
@@ -113,7 +112,7 @@ public class ManualTest {
                                                       new Reference("type")
                                               })));
 
-        builder.addFunction(new Function("printA", "printA_global", List.of(new Statement[]{
+        builder.addFunction(new Function("printA", List.of(new Statement[]{
                 new Call(new Reference("print"),
                          List.of(new Expression[]{
                                  new Reference("a")
@@ -127,7 +126,7 @@ public class ManualTest {
         })));
 
         builder.addClass(new MPyClass("B", new Reference("__MPyType_Object"), List.of(new Function[]{
-                new Function("print", "printA_TypeB", List.of(new Statement[]{
+                new Function("print", List.of(new Statement[]{
                         new Call(new Reference("print"),
                                  List.of(new Expression[]{
                                          new Reference("self")
@@ -135,7 +134,7 @@ public class ManualTest {
                 }), List.of(new Argument[]{
                         new Argument("self", 0)
                 }), List.of()),
-                new Function("__init__", "__init___TypeB", List.of(new Statement[] {
+                new Function("__init__", List.of(new Statement[] {
                     new SuperCall(List.of()),
                     new AttributeAssignment(new AttributeReference("b", new Reference("self")), new IntLiteral(100))
                 }), List.of(new Argument[]{
@@ -144,7 +143,7 @@ public class ManualTest {
         }), new HashMap<>()));
 
         builder.addClass(new MPyClass("C", new Reference("B"), List.of(new Function[]{
-               new Function("__init__", "__init___TypeC", List.of(new Statement[] {
+               new Function("__init__", List.of(new Statement[] {
                        new SuperCall(List.of())
                }), List.of(new Argument[]{
                        new Argument("self", 0)

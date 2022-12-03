@@ -138,11 +138,9 @@ def func1(x):
 print(func1(a))
 ```
 
-Eine Funktion wird über ein Objekt der Klasse `Function` erzeugt. Der Konstruktor hat die
-beiden Parameter `funcName` und `uniqueName`, wobei `funcName` der Name der Funktion wie im
-Python-Code ist und zum Auflösen über Referenzen innerhalb des Scopes dient. Der Parameter
-`uniqueName` ist ein eindeutiger Name für die Funktion und muss identisch zu `funcName`
-sein.
+Eine Funktion wird über ein Objekt der Klasse `Function` erzeugt. Der Konstruktor hat einen
+Parameter `funcName`, der der Name der Funktion wie im Python-Code ist und der zum Auflösen
+über Referenzen innerhalb des Scopes dient.
 
 Der Body einer Funktion wird als Liste von Objekten vom Typ `Statement` repräsentiert und im
 Konstruktor über den Parameter `body` übergeben.
@@ -172,8 +170,8 @@ List<Argument> parameterArguments = List.of(new Argument[] {new Argument("x", 0)
 List<VariableDeclaration> localVariables = List.of(new VariableDeclaration[] {localVarYDecl});  // Liste der lokalen Variablen
 
 // Function erstellen
-Function func1 = new Function("func1", "func1", body, parameterArguments, localVariables);  // Funktion erzeugen
-builder.addFunction(func1);                                                                 // Function dem CBuilder übergeben
+Function func1 = new Function("func1", body, parameterArguments, localVariables);       // Funktion erzeugen
+builder.addFunction(func1);                                                             // Function dem CBuilder übergeben
 ```
 
 ``` java
@@ -326,13 +324,14 @@ Beim Methodenaufruf darf `self` aber nicht in der Parameterliste vorkommen. (Sta
 Methoden, die nicht umgesetzt werden müssen, haben kein `self`.)
 
 Methoden haben zwei Methodennamen. Der Parameter `funcName` im `Function`-Konstruktor
-entspricht dem Funktionsnamen im Python-Code. Über diesen Namen werden die Methoden im
-jeweiligen Scope aufgelöst. Da Methoden vom CBuilder als normale C-Funktion im globalen
-Scope angelegt werden, müssen sie noch einen im gesamten Programm eindeutigen (internen)
-Namen bekommen, der über den Parameter `uniqueName` im `Function`-Konstruktor festgelegt
-wird. (Dennoch können Methoden nicht als normale Funktionen aufgerufen werden, sondern immer
-nur über den Kontext ihrer Klasse.) Beim Überschreiben von Methoden muss der `funcName`
-entsprechend identisch sein (und `uniqueName` muss variieren).
+entspricht dem Funktions-/Methodennamen im Python-Code. Über diesen Namen werden die
+Methoden im jeweiligen Scope aufgelöst. Da Methoden vom CBuilder als normale C-Funktion im
+globalen Scope angelegt werden, müssen sie noch einen im gesamten Programm eindeutigen
+(internen) Namen bekommen, der mit der Methode `Function#createUniqueCName()` festgelegt
+wird - diese Methode wird automatisch vom Konstruktor von `MPyClass` aufgerufen. (Dennoch
+können Methoden nicht als normale Funktionen aufgerufen werden, sondern immer nur über den
+Kontext ihrer Klasse.) Beim Überschreiben von Methoden muss der `funcName` entsprechend
+identisch sein.
 
 *Anmerkung*: Der Parameter `classAttributes` im Konstruktor von `MPyClass` wird nur für
 statische Attribute verwendet und kann ignoriert werden, da statische Attribute hier nicht
@@ -340,14 +339,14 @@ zum geforderten Sprachumfang gehören. Sie können hier einfach ein `Map.of()` �
 
 ``` java
 // Methode "__init__(self)" anlegen
-Statement simpleSuperCall = new SuperCall(List.of());                               // Aufruf von Super
-List<Statement> initBody = List.of(new Statement[] { simpleSuperCall });            // Body der Methode: super() kommt als erstes Statement
-List<Argument> initParamList = List.of(new Argument[] {new Argument("self", 0)});   // Parameterliste für "__init__" erstellen
-Function methodInit = new Function("__init__", "__init_11", initBody, initParamList, List.of());    // Methode "__init__(self)" erstellen; Name im C-Scope: "__init_11" (willkürlich, aber eindeutig im Programm)
+Statement simpleSuperCall = new SuperCall(List.of());                                   // Aufruf von Super
+List<Statement> initBody = List.of(new Statement[] { simpleSuperCall });                // Body der Methode: super() kommt als erstes Statement
+List<Argument> initParamList = List.of(new Argument[] {new Argument("self", 0)});       // Parameterliste für "__init__" erstellen
+Function methodInit = new Function("__init__", initBody, initParamList, List.of());     // Methode "__init__(self)" erstellen
 
 // Methode "foo(self, x)" anlegen
 List<Argument> fooParamList = List.of(new Argument[] {new Argument("self", 0), new Argument("x", 1)});  // Parameterliste für "foo"
-Function methodFooA = new Function("foo", "foo12", List.of(), fooParamList, List.of());                 // Methode "foo" mit leerem Body; Name im C-Scope: "foo12" (willkürlich, aber eindeutig im Programm)
+Function methodFooA = new Function("foo", List.of(), fooParamList, List.of());                          // Methode "foo" mit leerem Body
 
 // Klasse "A" anlegen: Erbt implizit von __MPyType_Object
 List<Function> functionListA = List.of(new Function[] { methodInit, methodFooA });  // Liste der Methoden in A
@@ -382,13 +381,13 @@ Für die Vererbung werden die bereits bekannten Elemente verwendet.
 Statement simpleSuperCall = new SuperCall(List.of());
 List<Statement> initBody = List.of(new Statement[] { simpleSuperCall });
 List<Argument> initParamList = List.of(new Argument[] {new Argument("self", 0)});
-Function methodInitB = new Function("__init__", "__init_111", initBody, initParamList, List.of());
+Function methodInitB = new Function("__init__", initBody, initParamList, List.of());
 
 // "foo(self, x)"
 Statement fooPrint = new Call(printRef, List.of(new Expression[] { new Reference("x")}));
 List<Argument> fooParamList = List.of(new Argument[] {new Argument("self", 0), new Argument("x", 1)});
 List<Statement> fooBody = List.of(new Statement[]{ fooPrint });
-Function methodFooB = new Function("foo", "foo122", fooBody, fooParamList, List.of());
+Function methodFooB = new Function("foo", fooBody, fooParamList, List.of());
 
 // Klasse "B"
 List<Function> functionListB = List.of(new Function[]{ methodInitB, methodFooB });
@@ -410,8 +409,8 @@ builder.addStatement(callFoo);
 
 Ausblick: Für den Aufruf von Methoden auf Objekten erzeugen Sie wieder einen `Call`, der als
 Referenz eine `AttributeReference` erhält. Diese `AttributeReference` gruppiert den
-Methodennamen (den `funcName`, nicht den `uniqueName`!) und eine Referenz auf das Objekt.
-Weitere Details [siehe unten](usage_cbuilder.md#methoden-auf-objekten-aufrufen).
+Methodennamen (`funcName`) und eine Referenz auf das Objekt. Weitere Details [siehe
+unten](usage_cbuilder.md#methoden-auf-objekten-aufrufen).
 
 ### Verwendung von `self`
 
@@ -441,12 +440,12 @@ Statement returnX = new ReturnStatement(getSelfX);
 // "__init__(self, y)"
 List<Statement> initBodyWithSelfAssign = List.of(new Statement[] { simpleSuperCall, assignSelfX });
 List<Argument> initParamListWithX = List.of(new Argument[] {new Argument("self", 0), new Argument("y", 1)});
-Function methodInitWithSelf = new Function("__init__", "__init_13", initBodyWithSelfAssign, initParamListWithX, List.of());
+Function methodInitWithSelf = new Function("__init__", initBodyWithSelfAssign, initParamListWithX, List.of());
 
 // "getX(self)"
 List<Statement> getXBody = List.of(new Statement[] { returnX });
 List<Argument> paramListGetX = List.of(new Argument[] {new Argument("self", 0)});
-Function getX = new Function("getX", "getX14", getXBody , paramListGetX, List.of());
+Function getX = new Function("getX", getXBody, paramListGetX, List.of());
 
 // Class "C"
 List<Function> functionListC = List.of(new Function[] { methodInitWithSelf, getX });
@@ -466,9 +465,9 @@ print(objectC.getX())
 Das Instanziieren einer Klasse erfolgt wie der Aufruf einer Funktion.
 
 Der Aufruf von Methoden wird über ein Objekt der Klasse `AttributeReference` und einen
-`Call` realisiert. Diese `AttributeReference` gruppiert den Methodennamen (den `funcName`,
-nicht den `uniqueName`!) und eine Referenz auf das Objekt. Der Parameter `self` darf beim
-Methodenaufruf nicht übergeben werden.
+`Call` realisiert. Diese `AttributeReference` gruppiert den Methodennamen (`funcName`) und
+eine Referenz auf das Objekt. Der Parameter `self` darf beim Methodenaufruf nicht übergeben
+werden.
 
 ``` java
 // Variable "objectC"
