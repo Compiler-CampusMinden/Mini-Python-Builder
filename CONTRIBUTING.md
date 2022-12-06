@@ -16,18 +16,8 @@ request there.
 
 ## Pull Requests
 
-You are welcome to contribute via a pull request.
+At the present time this repository is a Git subtree export from a private
+[root repository] and hence is considered "read-only". Changes are applied to the
+[root repository] and are subsequently published here via a `git subtree push`.
 
-Please **open an issue** first so that your contribution can be discussed
-beforehand.
-
-Work on your contribution in a feature branch. You will probably need to fork
-this repository to do this.
-
-Submit your contribution as a pull request from your feature branch to the
-`master` branch in this repository. Please make sure that your **feature
-branch starts on top of the current `master` branch**.
-
-After acceptance (i.e. merging your feature branch into the `master` branch),
-your contribution is automatically subject to the licence of this repository
-(MIT).
+[root repository]: https://github.com/Compiler-CampusMinden/Mini-Python
