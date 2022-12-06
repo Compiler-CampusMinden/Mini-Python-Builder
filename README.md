@@ -2,7 +2,15 @@
 
 ## Overview
 
-tbd
+This repository provides a Java-based [builder] for [Mini-Python] and a
+matching [C runtime]. The [builder] emits corresponding C code via API
+calls (analogous to LLVM). Please read the documentation in the [docs]
+folder.
+
+[builder]: ./src/
+[Mini-Python]: ./docs/syntax_definition.md
+[C runtime]: ./c-runtime/
+[docs]: ./docs/
 
 
 ## Contributing
