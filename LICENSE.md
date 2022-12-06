@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2022 Malte Reinsch, Florian Warzecha, Sebastian Steinmeyer, BC George, Carsten Gips
+Copyright (c) 2022 Florian Warzecha, Sebastian Steinmeyer, Michael Peters, BC George, Carsten Gips
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
