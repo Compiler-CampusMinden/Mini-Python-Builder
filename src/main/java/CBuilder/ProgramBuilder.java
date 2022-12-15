@@ -139,8 +139,8 @@ public class ProgramBuilder {
         program.append('\n');
 
         for (Function f : globalFunctions) {
-            program.append(f.buildCFunction());
             program.append(f.buildFuncObjectDeclaration());
+            program.append(f.buildCFunction());
         }
         program.append('\n');
 
