@@ -216,7 +216,7 @@ zugreifbar ist.
 
 ``` python
 class A:
-    def __init(self, x):
+    def __init__(self, x):
         self.x = x
     #end
 
