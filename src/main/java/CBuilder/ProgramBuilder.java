@@ -215,7 +215,7 @@ public class ProgramBuilder {
      * Write the c-program into the output file.
      * Additionally copies the c-runtime into output path.
      *
-     * @param destDir The directory containing the c-runtime.
+     * @param destDir The directory reveiving the emitted file and the c-runtime files.
      */
     public void writeProgram(Path destDir) {
         try {
