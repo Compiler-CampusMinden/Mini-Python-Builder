@@ -219,6 +219,9 @@ public class ProgramBuilder {
      */
     public void writeProgram(Path directory) {
         try {
+            // make sure to create the target folder
+            if (!directory.toFile().exists()) directory.toFile().mkdirs();
+            // copy all files to target folder
             if (getClass().getResource("/c-runtime").toURI().getScheme().equals("file")) {
                 Path p = Path.of(ProgramBuilder.class.getResource("/c-runtime").toURI());
                 copyFolder(p, directory);
@@ -250,7 +253,7 @@ public class ProgramBuilder {
         try (Stream<Path> stream = Files.walk(srcDir)) {
             stream.forEach(source -> {
                 try {
-                    Files.copy(source, destDir.resolve(srcDir.relativize(source)));
+                    Files.copy(source, destDir.resolve(srcDir.relativize(source)), REPLACE_EXISTING);
                 } catch (IOException e) {
                     throw new RuntimeException("Failed to copy template folder to output directory", e);
                 }
