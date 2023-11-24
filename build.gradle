@@ -3,8 +3,6 @@ plugins {
     id 'application'
 }
 
-group 'io.github.mini-python.cbuilder'
-version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -26,20 +24,6 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
-javadoc {
-    failOnError = false
-    options.showFromPublic()
-}
-
-task javadocAll(type: Javadoc) {
-    source = sourceSets.main.allSource
-    classpath = project.sourceSets.main.compileClasspath
-
-    destinationDir = file("${project.docsDir}/javadocAll")
-
-    failOnError = false
-    options.showAll()
-}
 
 test {
     useJUnitPlatform()
