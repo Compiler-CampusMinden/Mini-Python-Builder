@@ -4,7 +4,6 @@ import CBuilder.objects.MPyClass;
 import CBuilder.objects.functions.Function;
 import CBuilder.objects.functions.ReturnStatement;
 import CBuilder.variables.VariableDeclaration;
-import org.apache.commons.io.FileUtils;
 
 import java.io.IOException;
 import java.net.URI;
@@ -15,6 +14,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /**
  * Entrypoint to creating C code from a MiniPython AST.
@@ -219,7 +221,7 @@ public class ProgramBuilder {
         try {
             if (getClass().getResource("/c-runtime").toURI().getScheme().equals("file")) {
                 Path p = Path.of(ProgramBuilder.class.getResource("/c-runtime").toURI());
-                FileUtils.copyDirectory(p.toFile(), directory.toFile());
+                copyFolder(p, directory);
             } else {
                 copyFolderFromJar("/c-runtime", directory);
             }
@@ -234,6 +236,25 @@ public class ProgramBuilder {
             java.nio.file.Files.writeString(output, this.buildProgram(), java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.WRITE, java.nio.file.StandardOpenOption.TRUNCATE_EXISTING);
         } catch (java.io.IOException e) {
             throw new RuntimeException("Failed to write 'program.c'!", e);
+        }
+    }
+
+    /**
+     * Copy the c-runtime folder into the target location.
+     *
+     * @param srcDir The Path to the jar archive.
+     * @param destDir The output directory.
+     * @throws IOException Will be thrown if a needed file or folder is not accessible.
+     */
+    public void copyFolder(Path srcDir, Path destDir) throws IOException {
+        try (Stream<Path> stream = Files.walk(srcDir)) {
+            stream.forEach(source -> {
+                try {
+                    Files.copy(source, destDir.resolve(srcDir.relativize(source)));
+                } catch (IOException e) {
+                    throw new RuntimeException("Failed to copy template folder to output directory", e);
+                }
+            });
         }
     }
 
@@ -259,7 +280,7 @@ public class ProgramBuilder {
 
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                    Files.copy(file, targetLocation.resolve(jarArchive.relativize(file).toString()), StandardCopyOption.REPLACE_EXISTING);
+                    Files.copy(file, targetLocation.resolve(jarArchive.relativize(file).toString()), REPLACE_EXISTING);
                     return FileVisitResult.CONTINUE;
                 }
 
