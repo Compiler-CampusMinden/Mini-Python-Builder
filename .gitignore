@@ -55,7 +55,6 @@ replay_pid*
 **/out/
 **/target/
 .gradle/
-gradlew.bat
 # don't ignore any gradle wrapper files
 !gradle/
 
