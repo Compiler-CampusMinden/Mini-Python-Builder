@@ -215,18 +215,18 @@ public class ProgramBuilder {
      * Write the c-program into the output file.
      * Additionally copies the c-runtime into output path.
      *
-     * @param directory The directory containing the c-runtime.
+     * @param destDir The directory containing the c-runtime.
      */
-    public void writeProgram(Path directory) {
+    public void writeProgram(Path destDir) {
         try {
             // make sure to create the target folder
-            if (!directory.toFile().exists()) directory.toFile().mkdirs();
+            if (!destDir.toFile().exists()) destDir.toFile().mkdirs();
             // copy all files to target folder
             if (getClass().getResource("/c-runtime").toURI().getScheme().equals("file")) {
-                Path p = Path.of(ProgramBuilder.class.getResource("/c-runtime").toURI());
-                copyFolder(p, directory);
+                Path srcDir = Path.of(ProgramBuilder.class.getResource("/c-runtime").toURI());
+                copyFolder(srcDir, destDir);
             } else {
-                copyFolderFromJar("/c-runtime", directory);
+                copyFolderFromJar("/c-runtime", destDir);
             }
         } catch (URISyntaxException e) {
             throw new RuntimeException("Failed to get resource URI for template folder", e);
@@ -235,7 +235,7 @@ public class ProgramBuilder {
         }
 
         try {
-            Path output = Path.of(directory.toString(), "src/program.c");
+            Path output = Path.of(destDir.toString(), "src/program.c");
             java.nio.file.Files.writeString(output, this.buildProgram(), java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.WRITE, java.nio.file.StandardOpenOption.TRUNCATE_EXISTING);
         } catch (java.io.IOException e) {
             throw new RuntimeException("Failed to write 'program.c'!", e);
