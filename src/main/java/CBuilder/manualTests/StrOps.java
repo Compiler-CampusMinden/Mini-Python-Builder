@@ -34,7 +34,7 @@ public class StrOps {
     }
 
     public static void main(String[] args) {
-        Path fileOutput = java.nio.file.FileSystems.getDefault().getPath("compilerOutput");
+        Path fileOutput = java.nio.file.FileSystems.getDefault().getPath("build/compilerOutput/StrOps/");
         generateProgram(fileOutput);
     }
 }

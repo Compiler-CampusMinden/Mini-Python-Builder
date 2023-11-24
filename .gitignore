@@ -24,7 +24,6 @@
 #######################
 tmp/
 temp/
-compilerOutput/
 
 
 # AST & Symbol-Table stages #

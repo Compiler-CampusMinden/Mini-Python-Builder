@@ -33,7 +33,7 @@ public class IntOps {
     }
 
     public static void main(String[] args) {
-        Path fileOutput = java.nio.file.FileSystems.getDefault().getPath("compilerOutput");
+        Path fileOutput = java.nio.file.FileSystems.getDefault().getPath("build/compilerOutput/IntOps/");
         generateProgram(fileOutput);
     }
 }

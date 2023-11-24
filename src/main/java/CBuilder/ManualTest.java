@@ -173,7 +173,7 @@ public class ManualTest {
     }
 
     public static void main(String[] args) {
-        java.nio.file.Path fileOutput = java.nio.file.FileSystems.getDefault().getPath("compilerOutput");
+        java.nio.file.Path fileOutput = java.nio.file.FileSystems.getDefault().getPath("build/compilerOutput/ManualTest/");
         generateProgram(fileOutput);
     }
 }

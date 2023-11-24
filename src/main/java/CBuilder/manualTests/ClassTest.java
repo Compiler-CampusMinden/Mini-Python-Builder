@@ -46,7 +46,7 @@ public class ClassTest {
     }
 
     public static void main(String[] args) {
-        Path fileOutput = java.nio.file.FileSystems.getDefault().getPath("compilerOutput");
+        Path fileOutput = java.nio.file.FileSystems.getDefault().getPath("build/compilerOutput/ClassTest/");
         generateProgram(fileOutput);
     }
 }
