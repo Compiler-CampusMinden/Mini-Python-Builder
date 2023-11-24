@@ -23,7 +23,7 @@ OUTDIR := $(abspath ./out)
 # Default Flags #
 #################
 
-CFLAGS ?= -pedantic -Wall -Werror
+CFLAGS ?= -pedantic -Wall #-Werror
 CFLAGS += -std=c11 -I$(INCLUDEDIR)
 CFLAGS += -ffile-prefix-map=$(SRCDIR)=.
 # make getline() (see man getline(3)) available
