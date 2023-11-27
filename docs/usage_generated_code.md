@@ -14,14 +14,20 @@ passender C-Compiler verfügbar sein.
 
 ## Notwendige Software
 
+Sie benötigen **[make](https://www.gnu.org/software/make/)** und einen **C compiler** (z. B.
+[gcc](https://gcc.gnu.org/) oder [clang](https://clang.llvm.org/)).
+
 Das Projekt wurde mit den folgenden Versionen der genannten Tools getestet (Sie brauchen
-natürlich nur einen der genannten C-Compiler):
+natürlich nur _einen_ der genannten C-Compiler):
 
 | Name                                       | Version |
 |:-------------------------------------------|:-------:|
-| [make](https://www.gnu.org/software/make/) |    4    |
+| [make](https://www.gnu.org/software/make/) |  3.81   |
 | [gcc](https://gcc.gnu.org/)                |    8    |
 | [clang](https://clang.llvm.org/)           |   10    |
+
+Verstehen Sie die angegebenen Versionen bitte als untere Schranke, d.h. neuere Versionen sollten
+auch problemlos funktionieren.
 
 ### Linux
 

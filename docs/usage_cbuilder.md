@@ -8,11 +8,16 @@ zusätzlich im CBuilder enthaltenen [C-Runtime](../c-runtime/) in ein ausführba
 
 ## Setup
 
-Der CBuilder ist ein Java-basiertes Projekt. Sie können den CBuilder entsprechend mit dem
-üblichen Vorgehen in Ihr eigenes Java-Projekt einbinden. Ein weiteres Setup ist für den
-CBuilder selbst nicht erforderlich. Für das Übersetzen des mit dem CBuilder erzeugten
-C-Codes benötigen Sie noch einen C-Compiler wie in [Verwendung des generierten
-C-Codes](usage_generated_code.md) beschrieben.
+Der CBuilder ist ein Java-basiertes Projekt. Es sollten alle Java-Versionen ab Java 9 nutzbar
+sein. Empfohlen wird das **[JDK 17 LTS](https://openjdk.org/projects/jdk/17/)**, da JDK 21 LTS
+aktuell noch nicht von [Gradle unterstützt](https://docs.gradle.org/current/userguide/compatibility.html)
+wird.
+
+Sie können den CBuilder entsprechend mit dem üblichen Vorgehen in Ihr eigenes Java-Projekt
+einbinden. Ein weiteres Setup ist für den CBuilder selbst nicht erforderlich.
+
+Für das Übersetzen des mit dem CBuilder erzeugten C-Codes benötigen Sie noch einen C-Compiler
+wie in [Verwendung des generierten C-Codes](usage_generated_code.md) beschrieben.
 
 Es existiert eine einfache [Gradle-Konfiguration](../build.gradle), mit der Sie das Projekt
 in der Konsole oder auch in der IDE bauen können. Vermutlich wollen Sie dort noch Ihre
