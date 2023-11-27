@@ -43,8 +43,9 @@ _[Verwendung des generierten C-Codes im Mini-Python-CBuilder]_.
 ## Contributing
 
 Questions, bug reports and feature requests are very welcome.
-Please be sure to read the [contributor guidelines](CONTRIBUTING.md) before
-opening a new issue.
+
+Please check first whether your request has already been addressed in other (open or closed)
+topics. Feel free to reopen closed issues if necessary.
 
 
 ---
