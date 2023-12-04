@@ -151,7 +151,7 @@ public class ProgramBuilder {
         }
         program.append('\n');
 
-        program.append("int main() {\n");
+        program.append("int main(int argc, char *argv[]) {\n");
 
         StringBuilder body = new StringBuilder();
 
