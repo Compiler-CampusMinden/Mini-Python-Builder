@@ -305,7 +305,7 @@ void __mpy_builtins_setup(void) {
     __mpy_obj_ref_inc(__mpy_super);
 }
 
-void __mpy_builtins_cleanup() {
+void __mpy_builtins_cleanup(void) {
     __mpy_obj_ref_dec(__MPyType_Object);
 
     __mpy_obj_ref_dec(__MPyType_Num);
