@@ -4,7 +4,7 @@
 #include "stdbool.h"
 
 /**
- * @file 
+ * @file
  */
 
 /**
@@ -38,24 +38,24 @@ struct __MPyObj {
     /**
      * unique id of the object
      */
-    unsigned int id; 
+    unsigned int id;
     /**
      * pointer to the content of the object - managed by type specific implementation
      */
-    void *content; 
+    void *content;
     /**
      * pointer to the refCount - *not* managed by type specific implementation
      */
-    unsigned int refCount; 
+    unsigned int refCount;
     /**
      * pointer to the objects type
      */
-    __MPyObj *type; 
+    __MPyObj *type;
     /**
-     * allow an object to temporarily keep its content longer than refCount implies 
+     * allow an object to temporarily keep its content longer than refCount implies
      * by setting this to true instead of decrementing refCount
      */
-    bool temporary; 
+    bool temporary;
     /**
      * Allow builtin objects with additional allocations inside content to deallocate them.
      */
@@ -86,7 +86,7 @@ __MPyObj* __mpy_obj_return(__MPyObj*);
 /**
  * Initialises a new __MPyObj.
  */
-__MPyObj* __mpy_obj_new();
+__MPyObj* __mpy_obj_new(void);
 
 /**
  * Increment the ref count if the object is used in another context.

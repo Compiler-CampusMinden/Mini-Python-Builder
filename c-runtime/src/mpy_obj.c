@@ -19,7 +19,7 @@ __MPyObj* __mpy_obj_return(__MPyObj *obj) {
     return obj; // return obj to allow chaining
 }
 
-__MPyObj* __mpy_obj_new() {
+__MPyObj* __mpy_obj_new(void) {
 #ifdef MINI_PYTHON_DEBUG
     fprintf(stderr, "DEBUG: __mpy_obj_new: creating new object with id '%d'\n", __MPyObjCount);
 #endif
@@ -107,7 +107,7 @@ __MPyObj* __mpy_obj_get_attr_rec(__MPyObj *self, const char *name, const char *t
     // and try calling the method after using the modifier method....)
     // we need to look up the class attributes and parent for attributes initialized in the parent,
     // static functions and non-overriden functions
-    
+
     // note: the recursion (or iteration, if recursion turns out to be suboptimal)
     // may need to cache the looked up classes, since in theory python3's MRO allows recursive inheritance
     // relationships

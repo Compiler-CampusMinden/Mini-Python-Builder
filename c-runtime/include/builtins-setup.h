@@ -105,10 +105,8 @@ extern __MPyObj *__MPyFunc_Object_init;
 
 extern __MPyObj *__mpy_super;
 
-void __mpy_builtins_setup();
+void __mpy_builtins_setup(void);
 
-void __mpy_builtins_cleanup();
+void __mpy_builtins_cleanup(void);
 
 #endif
-
-

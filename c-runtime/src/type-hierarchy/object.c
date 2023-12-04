@@ -74,7 +74,7 @@ __MPyObj *__mpy_object_get_attr_impl(__MPyObj *self, const char *name) {
     return __mpy_hash_map_get(self->content, (void*) name);
 }
 
-__MPyObj *__mpy_obj_init_object() {
+__MPyObj *__mpy_obj_init_object(void) {
     __MPyObj *obj = __mpy_obj_new();
     obj->type = __MPyType_Object;
     obj->content = __mpy_hash_map_init(&__mpy_hash_map_str_key_cmp);

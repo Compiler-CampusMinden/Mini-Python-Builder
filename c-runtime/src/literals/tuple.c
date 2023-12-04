@@ -31,7 +31,7 @@ void __mpy_obj_cleanup_tuple(__MPyObj *self) {
 }
 
 __MPyObj* __mpy_obj_init_tuple(unsigned int size) {
-    __MPyObj *obj = __mpy_obj_new(__MPyType_Object);
+    __MPyObj *obj = __mpy_obj_new();
     obj->type = __MPyType_Tuple;
     obj->cleanupAction = __mpy_obj_cleanup_tuple;
 

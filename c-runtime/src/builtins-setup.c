@@ -122,7 +122,7 @@ __MPyObj *__MPyFunc_Object_init;
 
 __MPyObj *__mpy_super;
 
-void __mpy_builtins_setup() {
+void __mpy_builtins_setup(void) {
     // idea: since the basic parts of the type hierarchy recursively depend on one another
     // (e. g. type inherits from object, but object itself is an instance of the type class)
     // first init the base MpyObj and afterwards initialise the type so all pointers point in the correct location
@@ -305,7 +305,7 @@ void __mpy_builtins_setup() {
     __mpy_obj_ref_inc(__mpy_super);
 }
 
-void __mpy_builtins_cleanup() {
+void __mpy_builtins_cleanup(void) {
     __mpy_obj_ref_dec(__MPyType_Object);
 
     __mpy_obj_ref_dec(__MPyType_Num);
