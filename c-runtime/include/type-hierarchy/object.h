@@ -3,7 +3,7 @@
 
 #include "mpy_obj.h"
 
-__MPyObj *__mpy_obj_init_object();
+__MPyObj *__mpy_obj_init_object(void);
 
 __MPyObj* __mpy_object_func_str_impl(__MPyObj *args, __MPyObj *kwargs);
 
