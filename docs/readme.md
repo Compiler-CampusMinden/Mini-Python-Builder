@@ -15,5 +15,5 @@ Sie finden hier die Dokumentation zum [syntaktischen](syntax_definition.md) und
 [semantischen](semantic_definition.md) Sprachumfang von Mini-Python sowie die Dokumentation zum
 [CBuilder](usage_cbuilder.md) und der [C-Laufzeitumgebung](usage_generated_code.md).
 
-Sie brauchen ein **Java JDK** ab Version 9 (empfohlen: **JDK 17 LTS**) und **make** sowie den **gcc**-
+Sie brauchen ein **Java JDK** ab Version 9 (empfohlen: **JDK 21 LTS**) und **make** sowie den **gcc**-
 oder **clang**-Compiler.

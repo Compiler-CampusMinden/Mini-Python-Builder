@@ -9,9 +9,7 @@ zusätzlich im CBuilder enthaltenen [C-Runtime](../c-runtime/) in ein ausführba
 ## Setup
 
 Der CBuilder ist ein Java-basiertes Projekt. Es sollten alle Java-Versionen ab Java 9 nutzbar
-sein. Empfohlen wird das **[JDK 17 LTS](https://openjdk.org/projects/jdk/17/)**, da JDK 21 LTS
-aktuell noch nicht von [Gradle unterstützt](https://docs.gradle.org/current/userguide/compatibility.html)
-wird.
+sein. Empfohlen wird das **[JDK 21 LTS](https://openjdk.org/projects/jdk/21/)**.
 
 Sie können den CBuilder entsprechend mit dem üblichen Vorgehen in Ihr eigenes Java-Projekt
 einbinden. Ein weiteres Setup ist für den CBuilder selbst nicht erforderlich.
