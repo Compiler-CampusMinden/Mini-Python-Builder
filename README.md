@@ -24,8 +24,7 @@ For details please refer to the [documentation].
 ## Required software
 
 To work with the builder, you need **Java**. The actual release does not really matter
-(Java 9 and greater should work), however [JDK 17 LTS] is recommended in order to be
-supported by Gradle.
+(Java 9 and newer should work), however [JDK 21 LTS] is recommended.
 
 To compile the generated C code, you need **[make]** and a **C compiler** (e.g. [gcc] or
 [clang]).
@@ -33,7 +32,7 @@ To compile the generated C code, you need **[make]** and a **C compiler** (e.g. 
 You also need a POSIX-compatible operating system. For details see
 _[Verwendung des generierten C-Codes im Mini-Python-CBuilder]_.
 
-[JDK 17 LTS]: https://openjdk.org/projects/jdk/17/
+[JDK 21 LTS]: https://openjdk.org/projects/jdk/21/
 [make]: https://www.gnu.org/software/make/
 [gcc]: https://gcc.gnu.org/
 [clang]: https://clang.llvm.org/
