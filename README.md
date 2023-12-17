@@ -8,7 +8,7 @@ This repository provides
 2.  a **Java-based [builder]**, and
 3.  a compatible **[C runtime environment]**.
 
-The builder emits C code via API calls (analogous to LLVM): To generate C code for a Mini
+The builder emits C code via API calls (analogous to [LLVM](https://llvm.org/)): To generate C code for a Mini
 Python program, you call the builder functions while traversing the AST. This generated
 code can be compiled into an executable application using a standard C compiler and the
 C runtime environment provided here.
