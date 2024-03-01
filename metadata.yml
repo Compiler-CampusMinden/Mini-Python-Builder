@@ -6,7 +6,7 @@ description: >-
   This repository provides a Java-based builder for Mini-Python and a matching C
   runtime. The builder emits corresponding C code via API calls (analogous to
   LLVM). Please read the documentation in the docs folder.
-license: https://choosealicense.com/licenses/mit/
+license: https://opensource.org/license/mit
 id: https://github.com/Compiler-CampusMinden/Mini-Python-Builder
 creator:
   - givenName: Carsten
