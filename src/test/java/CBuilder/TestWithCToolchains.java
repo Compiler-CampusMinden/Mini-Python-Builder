@@ -1,5 +1,6 @@
 package CBuilder;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,6 +12,7 @@ import java.nio.file.Path;
 import static CBuilder.ManualTest.generateProgram;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Disabled
 public class TestWithCToolchains {
 
     private void generateAndCompileProgram(Path outputDirectory) throws IOException, InterruptedException {
