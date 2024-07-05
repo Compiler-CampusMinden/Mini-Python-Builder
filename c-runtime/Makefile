@@ -103,16 +103,23 @@ doc:
 lint:
 	clang-tidy --checks=*,-bugprone-reserved-identifier,-cert-dcl37-c,-cert-dcl51-cpp,-altera-struct-pack-align $(SRC)
 
+#https://github.com/catchorg/Catch2/blob/v2.x/include/catch.hpp
+.PHONY: curl_catch
+curl_catch:
+	curl -o $(TESTDIR)/include/catch.hpp https://raw.githubusercontent.com/catchorg/Catch2/v2.x/single_include/catch2/catch.hpp
+
 .PHONY: test
-test:
+test: curl_catch
 	d=$$(date +%s)\
 	; make -f $(TESTDIR)/Systemtests/makefile \
 	&& echo "Build took $$(($$(date +%s)-d)) seconds"
+	make test_clean
 
 
 .PHONY: test_clean
 test_clean:
 	make -f $(TESTDIR)/Systemtests/makefile clean
+	$(RM) -r $(TESTDIR)/include/catch.hpp
 
 .PHONY: test_echo
 test_echo:
