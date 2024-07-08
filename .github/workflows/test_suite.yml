@@ -1,0 +1,62 @@
+name: CBuilder Unit/System Tests & C-Runtime System Tests
+
+on:
+  #push:
+  #branches:
+  #- "test_suite"
+  workflow_dispatch:
+
+jobs:
+  catch2:
+    name: CATCH2 Tests
+    strategy:
+      matrix:
+        os: [macos-latest-large]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Pre Clean
+        working-directory: ./c-runtime
+        run: make clean
+      - name: Exec makefile
+        working-directory: ./c-runtime
+        run: make test
+      - name: Clean Up
+        working-directory: ./c-runtime
+        run: make test_clean ; make clean
+
+  languagefeatures:
+    name: languagefeatures
+    needs: catch2
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest-large]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: gradle
+      - name: Build with Gradle
+        run: ./gradlew test
+
+  spotless:
+    name: Spotless
+    needs: languagefeatures
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: gradle
+      - name: Spotless
+        run: ./gradlew spotlessJavaCheck
