@@ -88,3 +88,12 @@ doc:
 .PHONY: lint
 lint:
 	clang-tidy --checks=*,-bugprone-reserved-identifier,-cert-dcl37-c,-cert-dcl51-cpp,-altera-struct-pack-align $(SRC)
+
+
+.PHONY: test
+test: test_clean
+
+
+.PHONY: test_clean
+test_clean:
+	echo "dummy to allow gh workflow to do its job"

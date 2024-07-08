@@ -1,0 +1,42 @@
+name: CBuilder Tests & C-Runtime Tests
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  catch2:
+    name: Testing C-Runtime
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Pre Clean
+        working-directory: ./c-runtime
+        run: make clean
+      - name: Exec makefile
+        working-directory: ./c-runtime
+        run: make test
+      - name: Clean Up
+        working-directory: ./c-runtime
+        run: make test_clean ; make clean
+
+  languagefeatures:
+    name: Testing CBuilder (Java)
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - name: Build with Gradle
+        run: ./gradlew test
