@@ -1,6 +1,10 @@
 /* (C)2024 */
 package Systemtests.LanguageFeatures.BuiltInFunctions;
 
+import static Systemtests.TestHelpers.getProgramOutput;
+import static Systemtests.TestHelpers.makeProgram;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.Expression;
 import CBuilder.ProgramBuilder;
 import CBuilder.Reference;
@@ -12,20 +16,15 @@ import CBuilder.objects.AttributeReference;
 import CBuilder.objects.Call;
 import CBuilder.variables.Assignment;
 import CBuilder.variables.VariableDeclaration;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.List;
-import java.util.stream.Stream;
-
-import static Systemtests.TestHelpers.getProgramOutput;
-import static Systemtests.TestHelpers.makeProgram;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Disabled
 public class TestType {
@@ -63,10 +62,9 @@ public class TestType {
     }
 
     /**
-     * <p>Mini Python source code :
-     * <br> a = (133, True, "toPrint", 1+1)
-     * <br> print(type(a))
-     * </p>
+     * Mini Python source code : <br>
+     * a = (133, True, "toPrint", 1+1) <br>
+     * print(type(a))
      */
     void generate_type(Path output, Expression value) {
         ProgramBuilder builder = new ProgramBuilder();

@@ -2,30 +2,23 @@ package CBuilder.objects;
 
 import CBuilder.Expression;
 import CBuilder.literals.TupleLiteral;
-
 import java.util.List;
 import java.util.Map;
 
 /**
  * A Mini-Python call, i. e. a function call or object initialisation.
  *
- * Samples: `object()`, `a.b()`.
+ * <p>Samples: `object()`, `a.b()`.
  */
 public class Call implements Expression {
 
-    /**
-     * The positional arguments of the call.
-     */
+    /** The positional arguments of the call. */
     private List<Expression> args;
 
-    /**
-     * The keyword arguments of the call.
-     */
+    /** The keyword arguments of the call. */
     private Map<String, Expression> kwargs;
 
-    /**
-     * The callable object, i. e. a type or a function.
-     */
+    /** The callable object, i. e. a type or a function. */
     private Expression callable;
 
     /**
@@ -51,14 +44,19 @@ public class Call implements Expression {
 
         // finally: call
         // FIXME replace NULL with keyword arguments
-        return "__mpy_call(" + callable.buildExpression() + ", " + packedArguments.buildExpression() + ", NULL)";
+        return "__mpy_call("
+                + callable.buildExpression()
+                + ", "
+                + packedArguments.buildExpression()
+                + ", NULL)";
     }
 
     @Override
     public String buildStatement() {
-        // allow cleanup of returned object (which would otherwise simply vanish and leak the allocated memory)
-        // note: not needed for expressions, since as an expression the returned object is used (e. g. for assignment)
+        // allow cleanup of returned object (which would otherwise simply vanish and leak the
+        // allocated memory)
+        // note: not needed for expressions, since as an expression the returned object is used (e.
+        // g. for assignment)
         return "__mpy_obj_ref_dec(" + buildExpression() + ");\n";
     }
-
 }

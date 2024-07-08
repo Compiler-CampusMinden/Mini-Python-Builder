@@ -1,6 +1,11 @@
 /* (C)2024 */
 package Systemtests.LanguageFeatures.FunctionCalls;
 
+import static Systemtests.TestHelpers.getProgramOutput;
+import static Systemtests.TestHelpers.makeProgram;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import CBuilder.Expression;
 import CBuilder.ProgramBuilder;
 import CBuilder.Reference;
@@ -14,20 +19,14 @@ import CBuilder.objects.functions.Argument;
 import CBuilder.objects.functions.Function;
 import CBuilder.objects.functions.ReturnStatement;
 import CBuilder.variables.VariableDeclaration;
-import org.junit.jupiter.api.io.TempDir;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
-
-import static Systemtests.TestHelpers.getProgramOutput;
-import static Systemtests.TestHelpers.makeProgram;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class TestFunctionParams {
     String testClass = '[' + this.getClass().getSimpleName().toUpperCase() + "]\n";
@@ -82,24 +81,25 @@ public class TestFunctionParams {
     }
 
     /**
-     * <p> Mini Python source code for tests from top to bottom :
+     * Mini Python source code for tests from top to bottom : <br>
      * <br>
-     * <br> def function1():
-     * <br>     return ""
+     * def function1(): <br>
+     * return "" <br>
      * <br>
-     * <br> def function1(param1):
-     * <br>     return param1
+     * def function1(param1): <br>
+     * return param1 <br>
      * <br>
-     * <br> def function1(param1, param2):
-     * <br>     return param1 + param2
-     * <br> Calls :
+     * def function1(param1, param2): <br>
+     * return param1 + param2 <br>
+     * Calls : <br>
      * <br>
-     * <br> print(function1())
-     * <br> print(function1(123))
-     * <br> print(function1(123,123))
+     * print(function1()) <br>
+     * print(function1(123)) <br>
+     * print(function1(123,123)) <br>
      * <br>
-     * <br> Functions will Throw runtime error if more or less parameters are passed.
-     * <br> Also if a print called is passed as parameter and something is done that cant be done with a function pointer.
+     * Functions will Throw runtime error if more or less parameters are passed. <br>
+     * Also if a print called is passed as parameter and something is done that cant be done with a
+     * function pointer.
      */
     void generate_function(
             Path output,

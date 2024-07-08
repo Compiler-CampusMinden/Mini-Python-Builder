@@ -1,14 +1,9 @@
 package CBuilder.variables;
 
-/**
- * Declaration of a variable.
- * This makes the variable known to the c compiler.
- */
+/** Declaration of a variable. This makes the variable known to the c compiler. */
 public class VariableDeclaration {
 
-    /**
-     * The name of the variable.
-     */
+    /** The name of the variable. */
     protected String name;
 
     /**
@@ -27,8 +22,7 @@ public class VariableDeclaration {
      */
     private String initialisation() {
         // FIXME: init none instead of object
-        return " = __mpy_obj_init_object();\n" +
-                "__mpy_obj_ref_inc(" + name + ")";
+        return " = __mpy_obj_init_object();\n" + "__mpy_obj_ref_inc(" + name + ")";
     }
 
     /**
@@ -57,10 +51,10 @@ public class VariableDeclaration {
     /**
      * Create the c-code to decrement the reference counter of the variable.
      *
-     * @return A string which represents the c-code to decrement the reference counter of the variable
+     * @return A string which represents the c-code to decrement the reference counter of the
+     *     variable
      */
     public String buildRefDec() {
         return "__mpy_obj_ref_dec(" + name + ");\n";
     }
-
 }

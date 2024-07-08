@@ -1,21 +1,17 @@
 /* (C)2024 */
 package CBuilder.bool;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.keywords.bool.AndKeyword;
 import CBuilder.literals.IntLiteral;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-/**
- * Snapshot 23.02.2024
- */
+/** Snapshot 23.02.2024 */
 public class TestAndKeyword {
     String testClass = "[ANDKEYWORD]\n";
 
-    /**
-     * <p> 1 && 1</p>
-     */
+    /** 1 && 1 */
     @Test
     void build_expression() {
         String expected =

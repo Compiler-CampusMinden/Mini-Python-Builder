@@ -1,6 +1,8 @@
 /* (C)2024 */
 package CBuilder.variables;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.Expression;
 import CBuilder.Reference;
 import CBuilder.Statement;
@@ -9,20 +11,16 @@ import CBuilder.objects.AttributeReference;
 import CBuilder.objects.Call;
 import CBuilder.objects.functions.Argument;
 import CBuilder.objects.functions.Function;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-/**
- * Snapshot 22.02.2024
- */
+/** Snapshot 22.02.2024 */
 public class TestAssignment {
     String testClass = "[ASSIGNMENT]\n";
 
     /**
-     * <p>Test right hand side reference <br> a = b</p>
+     * Test right hand side reference <br>
+     * a = b
      */
     @Test
     void assignment_rhs_ref() {
@@ -43,7 +41,8 @@ public class TestAssignment {
     }
 
     /**
-     * <p>Test right hand side literal (no reference)<br> a = 133 </p>
+     * Test right hand side literal (no reference)<br>
+     * a = 133
      */
     @Test
     void assignment_rhs_int_literal() {
@@ -64,7 +63,8 @@ public class TestAssignment {
     }
 
     /**
-     * <p>Test right hand side function (which is also reference) <br> a = printA </p>
+     * Test right hand side function (which is also reference) <br>
+     * a = printA
      */
     @Test
     void assignment_rhs_function() {
@@ -99,7 +99,8 @@ public class TestAssignment {
     // d = a+b
 
     /**
-     * <p>Test right hand side expression (no reference)<br> d = a + b </p>
+     * Test right hand side expression (no reference)<br>
+     * d = a + b
      */
     @Test
     void assignment_rhs_expression() {

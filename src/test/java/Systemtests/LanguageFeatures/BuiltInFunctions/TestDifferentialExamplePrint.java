@@ -1,6 +1,10 @@
 /* (C)2024 */
 package Systemtests.LanguageFeatures.BuiltInFunctions;
 
+import static Systemtests.TestHelpers.getProgramOutput;
+import static Systemtests.TestHelpers.makeProgram;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.Expression;
 import CBuilder.ProgramBuilder;
 import CBuilder.Reference;
@@ -8,16 +12,11 @@ import CBuilder.literals.IntLiteral;
 import CBuilder.objects.Call;
 import CBuilder.variables.Assignment;
 import CBuilder.variables.VariableDeclaration;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-
 import java.io.*;
 import java.nio.file.Path;
 import java.util.List;
-
-import static Systemtests.TestHelpers.getProgramOutput;
-import static Systemtests.TestHelpers.makeProgram;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class TestDifferentialExamplePrint {
 
@@ -66,9 +65,9 @@ public class TestDifferentialExamplePrint {
     }
 
     /**
-     * <p>Mini Python source code :
-     * <br> a = 133
-     * <br> print(a) </p>
+     * Mini Python source code : <br>
+     * a = 133 <br>
+     * print(a)
      */
     static void generate_call_print(Path output) {
         ProgramBuilder builder = new ProgramBuilder();

@@ -1,6 +1,8 @@
 /* (C)2024 */
 package CBuilder.conditions.conditionalStatement;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.Expression;
 import CBuilder.Reference;
 import CBuilder.Statement;
@@ -9,14 +11,11 @@ import CBuilder.literals.IntLiteral;
 import CBuilder.objects.AttributeReference;
 import CBuilder.objects.Call;
 import CBuilder.variables.Assignment;
+import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.List;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestWhileStatement {
     String testClass = "[WHILESTATEMENT]\n";

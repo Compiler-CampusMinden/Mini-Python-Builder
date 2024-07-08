@@ -8,7 +8,6 @@ import CBuilder.objects.AttributeReference;
 import CBuilder.objects.Call;
 import CBuilder.variables.Assignment;
 import CBuilder.variables.VariableDeclaration;
-
 import java.nio.file.Path;
 import java.util.List;
 
@@ -23,17 +22,25 @@ public class IntOps {
         builder.addVariable(varADecl);
         builder.addStatement(new Assignment(varA, new IntLiteral(10)));
 
-        builder.addStatement(new Call(funcPrint, List.of(new Expression[]{
-            new Call(new AttributeReference("__xor__", varA), List.of(new Expression[]{
-                new IntLiteral(12),
-            }))
-        })));
+        builder.addStatement(
+                new Call(
+                        funcPrint,
+                        List.of(
+                                new Expression[] {
+                                    new Call(
+                                            new AttributeReference("__xor__", varA),
+                                            List.of(
+                                                    new Expression[] {
+                                                        new IntLiteral(12),
+                                                    }))
+                                })));
 
         builder.writeProgram(output);
     }
 
     public static void main(String[] args) {
-        Path fileOutput = java.nio.file.FileSystems.getDefault().getPath("build/compilerOutput/IntOps/");
+        Path fileOutput =
+                java.nio.file.FileSystems.getDefault().getPath("build/compilerOutput/IntOps/");
         generateProgram(fileOutput);
     }
 }

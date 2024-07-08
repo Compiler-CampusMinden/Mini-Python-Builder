@@ -1,22 +1,21 @@
 /* (C)2024 */
 package CBuilder.objects;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import CBuilder.Expression;
 import CBuilder.Reference;
 import CBuilder.Statement;
 import CBuilder.objects.functions.Argument;
 import CBuilder.objects.functions.Function;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class TestMPyClass {
     String testClass = "[TESTMPYCLASS]\n";

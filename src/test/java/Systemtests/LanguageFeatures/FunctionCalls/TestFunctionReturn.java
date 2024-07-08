@@ -1,6 +1,11 @@
 /* (C)2024 */
 package Systemtests.LanguageFeatures.FunctionCalls;
 
+import static Systemtests.TestHelpers.getProgramOutput;
+import static Systemtests.TestHelpers.makeProgram;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import CBuilder.Expression;
 import CBuilder.ProgramBuilder;
 import CBuilder.Reference;
@@ -15,20 +20,14 @@ import CBuilder.objects.functions.Argument;
 import CBuilder.objects.functions.Function;
 import CBuilder.objects.functions.ReturnStatement;
 import CBuilder.variables.VariableDeclaration;
-import org.junit.jupiter.api.io.TempDir;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
-
-import static Systemtests.TestHelpers.getProgramOutput;
-import static Systemtests.TestHelpers.makeProgram;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class TestFunctionReturn {
     // TODO cannot return tuple literal from function without runtime exception
@@ -108,25 +107,24 @@ public class TestFunctionReturn {
     }
 
     /**
-     * <p> Mini Python source code for tests from top to bottom :
+     * Mini Python source code for tests from top to bottom : <br>
      * <br>
-     * <br> def function1():
-     * <br>     return ""
+     * def function1(): <br>
+     * return "" <br>
      * <br>
-     * <br> def function1():
-     * <br>     return 123
+     * def function1(): <br>
+     * return 123 <br>
      * <br>
-     * <br> def function1():
-     * <br>     return False
+     * def function1(): <br>
+     * return False <br>
      * <br>
-     * <br> def function1(param1):
-     * <br>     return param1
+     * def function1(param1): <br>
+     * return param1 <br>
      * <br>
-     * <br> def function1():
-     * <br>     return (True and True)
+     * def function1(): <br>
+     * return (True and True) <br>
      * <br>
-     * <br> print(function1())
-     * </p>
+     * print(function1())
      */
     private static Stream<Arguments> sources_equals() {
         return Stream.of(

@@ -1,6 +1,10 @@
 /* (C)2024 */
 package Systemtests.LanguageFeatures.BuiltInFunctions;
 
+import static Systemtests.TestHelpers.getProgramOutput;
+import static Systemtests.TestHelpers.makeProgram;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.Expression;
 import CBuilder.ProgramBuilder;
 import CBuilder.Reference;
@@ -11,16 +15,11 @@ import CBuilder.objects.functions.Argument;
 import CBuilder.objects.functions.Function;
 import CBuilder.variables.Assignment;
 import CBuilder.variables.VariableDeclaration;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
-
-import static Systemtests.TestHelpers.getProgramOutput;
-import static Systemtests.TestHelpers.makeProgram;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class TestMetamorphicExamplePrint {
 
@@ -64,9 +63,9 @@ public class TestMetamorphicExamplePrint {
     }
 
     /**
-     * <p>Mini Python source code :
-     * <br> a = 133
-     * <br> print(a) </p>
+     * Mini Python source code : <br>
+     * a = 133 <br>
+     * print(a)
      */
     static void generate_call_print(Path output) {
         ProgramBuilder builder = new ProgramBuilder();
@@ -81,14 +80,13 @@ public class TestMetamorphicExamplePrint {
     }
 
     /**
-     * <p>Mini Python source code :
-     * <br> a = 133
+     * Mini Python source code : <br>
+     * a = 133 <br>
      * <br>
-     * <br> def printA(a):
-     * <br>    print(a)
+     * def printA(a): <br>
+     * print(a) <br>
      * <br>
-     * <br> printA(a)
-     * </p>
+     * printA(a)
      */
     static void generate_print_through_function(Path output) {
         ProgramBuilder builder = new ProgramBuilder();

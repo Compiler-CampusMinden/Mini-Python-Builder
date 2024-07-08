@@ -1,15 +1,13 @@
 /* (C)2024 */
 package CBuilder.bool;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.keywords.bool.OrKeyword;
 import CBuilder.literals.BoolLiteral;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-/**
- * Snapshot 23.02.2024
- */
+/** Snapshot 23.02.2024 */
 public class TestOrKeyword {
     String testClass = "[ORKEYWORD]\n";
 

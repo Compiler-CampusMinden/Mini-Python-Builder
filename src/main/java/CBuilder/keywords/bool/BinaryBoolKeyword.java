@@ -3,28 +3,18 @@ package CBuilder.keywords.bool;
 import CBuilder.Expression;
 import CBuilder.objects.AttributeReference;
 import CBuilder.objects.Call;
-
 import java.util.List;
-import java.util.Map;
 
-/**
- * Represents a boolean operation with a left and a right expression.
- */
+/** Represents a boolean operation with a left and a right expression. */
 abstract class BinaryBoolKeyword implements Expression {
 
-    /**
-     * The representing operator in c.
-     */
+    /** The representing operator in c. */
     private String cOp;
 
-    /**
-     * The operations left expression.
-     */
+    /** The operations left expression. */
     private Expression x;
 
-    /**
-     * The operations right expression.
-     */
+    /** The operations right expression. */
     private Expression y;
 
     /**
@@ -55,8 +45,10 @@ abstract class BinaryBoolKeyword implements Expression {
 
     @Override
     public String buildStatement() {
-        // allow cleanup of returned object (which would otherwise simply vanish and leak the allocated memory)
-        // note: not needed for expressions, since as an expression the returned object is used (e. g. for assignment)
+        // allow cleanup of returned object (which would otherwise simply vanish and leak the
+        // allocated memory)
+        // note: not needed for expressions, since as an expression the returned object is used (e.
+        // g. for assignment)
         return "__mpy_obj_ref_dec(" + buildExpression() + ");\n";
     }
 }

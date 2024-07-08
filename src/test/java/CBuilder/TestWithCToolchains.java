@@ -1,21 +1,21 @@
 package CBuilder;
 
+import static CBuilder.ManualTest.generateProgram;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.IOException;
+import java.nio.file.Path;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.io.IOException;
-import java.nio.file.Path;
-
-import static CBuilder.ManualTest.generateProgram;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 @Disabled
 public class TestWithCToolchains {
 
-    private void generateAndCompileProgram(Path outputDirectory) throws IOException, InterruptedException {
+    private void generateAndCompileProgram(Path outputDirectory)
+            throws IOException, InterruptedException {
         generateProgram(outputDirectory);
 
         ProcessBuilder builder = new ProcessBuilder("make");
@@ -30,8 +30,9 @@ public class TestWithCToolchains {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = { "gcc", "clang" })
-    void compile(String compiler, @TempDir Path outputDirectory) throws IOException, InterruptedException {
+    @ValueSource(strings = {"gcc", "clang"})
+    void compile(String compiler, @TempDir Path outputDirectory)
+            throws IOException, InterruptedException {
         generateProgram(outputDirectory);
 
         ProcessBuilder builder = new ProcessBuilder("make");
@@ -49,7 +50,14 @@ public class TestWithCToolchains {
     void valgrind(@TempDir Path workDirectory) throws IOException, InterruptedException {
         generateAndCompileProgram(workDirectory);
 
-        ProcessBuilder builder = new ProcessBuilder("valgrind", "--show-error-list=yes", "--leak-check=full", "--show-leak-kinds=all", "--error-exitcode=1", "./bin/program");
+        ProcessBuilder builder =
+                new ProcessBuilder(
+                        "valgrind",
+                        "--show-error-list=yes",
+                        "--leak-check=full",
+                        "--show-leak-kinds=all",
+                        "--error-exitcode=1",
+                        "./bin/program");
         builder.directory(workDirectory.toFile());
         builder.inheritIO();
 
@@ -63,7 +71,7 @@ public class TestWithCToolchains {
         generateProgram(workDirectory);
 
         // this does not error on warnings, but those are too broad anyway
-        ProcessBuilder builder = new ProcessBuilder("make",  "lint");
+        ProcessBuilder builder = new ProcessBuilder("make", "lint");
         builder.directory(workDirectory.toFile());
         builder.inheritIO();
 

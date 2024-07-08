@@ -1,13 +1,9 @@
 package CBuilder.literals;
 
-/**
- * A simple string literal.
- */
+/** A simple string literal. */
 public class StringLiteral implements Literal {
 
-    /**
-     * The containing string value.
-     */
+    /** The containing string value. */
     String value;
 
     /**

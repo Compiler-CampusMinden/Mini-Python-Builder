@@ -4,28 +4,19 @@ import CBuilder.Statement;
 import CBuilder.conditions.conditionalStatement.ElifStatement;
 import CBuilder.conditions.conditionalStatement.ElseStatement;
 import CBuilder.conditions.conditionalStatement.IfStatement;
-
 import java.util.List;
 import java.util.Optional;
 
-/**
- * A MiniPython if (/else if/else) block.
- */
+/** A MiniPython if (/else if/else) block. */
 public class IfThenElseStatement implements Statement {
 
-    /**
-     * The containing if block.
-     */
+    /** The containing if block. */
     private IfStatement ifStatement;
 
-    /**
-     * A list of the containing elif blocks.
-     */
+    /** A list of the containing elif blocks. */
     private Optional<List<ElifStatement>> elifStatements;
 
-    /**
-     * The containing else block.
-     */
+    /** The containing else block. */
     private Optional<ElseStatement> elseStatement;
 
     /**
@@ -35,7 +26,10 @@ public class IfThenElseStatement implements Statement {
      * @param elifStatements An optional list of elif statements.
      * @param elseStatement An optional else statement.
      */
-    public IfThenElseStatement(IfStatement ifStatement, Optional<List<ElifStatement>> elifStatements, Optional<ElseStatement> elseStatement) {
+    public IfThenElseStatement(
+            IfStatement ifStatement,
+            Optional<List<ElifStatement>> elifStatements,
+            Optional<ElseStatement> elseStatement) {
         this.ifStatement = ifStatement;
         this.elifStatements = elifStatements;
         this.elseStatement = elseStatement;

@@ -1,6 +1,10 @@
 /* (C)2024 */
 package Systemtests.LanguageFeatures.Classes;
 
+import static Systemtests.TestHelpers.getProgramOutput;
+import static Systemtests.TestHelpers.makeProgram;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.Expression;
 import CBuilder.ProgramBuilder;
 import CBuilder.Reference;
@@ -13,20 +17,15 @@ import CBuilder.objects.functions.Argument;
 import CBuilder.objects.functions.Function;
 import CBuilder.variables.Assignment;
 import CBuilder.variables.VariableDeclaration;
-import org.junit.jupiter.api.io.TempDir;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-
-import static Systemtests.TestHelpers.getProgramOutput;
-import static Systemtests.TestHelpers.makeProgram;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class TestClassInit {
     String testClass = '[' + this.getClass().getSimpleName().toUpperCase() + "]\n";
@@ -132,22 +131,22 @@ public class TestClassInit {
     }
 
     /**
-     * <p> Mini Python source code for tests from top to bottom :
+     * Mini Python source code for tests from top to bottom : <br>
      * <br>
-     * <br> class ClassA(__MPyType_Object):
+     * class ClassA(__MPyType_Object): <br>
      * <br>
-     * <br>     def __init__(self):
-     * <br>         print("[ClassA] Print from __init__\n")
+     * def __init__(self): <br>
+     * print("[ClassA] Print from __init__\n") <br>
      * <br>
-     * <br> class ClassB(__MPyType_Object):
-     * <br>     def __init__(self, x):
-     * <br>         print("[ClassB] Print from __init__" + str(param1))
+     * class ClassB(__MPyType_Object): <br>
+     * def __init__(self, x): <br>
+     * print("[ClassB] Print from __init__" + str(param1)) <br>
      * <br>
-     * <br> class ClassB(__MPyTypeObject):
-     * <br>     def __init__(self, x, y):
-     * <br>         print("[ClassB] Print from __init__ Param1 : " + str(x) + " Param2 : " + str(y))
+     * class ClassB(__MPyTypeObject): <br>
+     * def __init__(self, x, y): <br>
+     * print("[ClassB] Print from __init__ Param1 : " + str(x) + " Param2 : " + str(y)) <br>
      * <br>
-     * <br> x = className(( , param1, (param1,param2)))
+     * x = className(( , param1, (param1,param2)))
      */
     void generate_class(
             Path output,

@@ -2,7 +2,6 @@ package CBuilder.conditions.conditionalStatement;
 
 import CBuilder.Statement;
 import CBuilder.conditions.IfThenElseStatement;
-
 import java.util.List;
 
 /**
@@ -38,5 +37,7 @@ public class ElseStatement implements Statement {
     }
 
     @Override
-    public String buildStatement() { return null; }
+    public String buildStatement() {
+        return null;
+    }
 }

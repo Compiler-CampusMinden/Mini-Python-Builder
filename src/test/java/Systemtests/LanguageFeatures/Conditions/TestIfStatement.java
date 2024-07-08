@@ -1,6 +1,10 @@
 /* (C)2024 */
 package Systemtests.LanguageFeatures.Conditions;
 
+import static Systemtests.TestHelpers.getProgramOutput;
+import static Systemtests.TestHelpers.makeProgram;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.Expression;
 import CBuilder.ProgramBuilder;
 import CBuilder.Reference;
@@ -11,20 +15,15 @@ import CBuilder.literals.BoolLiteral;
 import CBuilder.literals.IntLiteral;
 import CBuilder.literals.StringLiteral;
 import CBuilder.objects.Call;
-import org.junit.jupiter.api.io.TempDir;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
-
-import static Systemtests.TestHelpers.getProgramOutput;
-import static Systemtests.TestHelpers.makeProgram;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class TestIfStatement {
     String testClass = '[' + this.getClass().getSimpleName().toUpperCase() + "]\n";
@@ -96,12 +95,10 @@ public class TestIfStatement {
     }
 
     /**
-     * <p> Mini Python source code :
+     * Mini Python source code : <br>
      * <br>
-     * <br> if(false/true, 0, 1):
-     * <br>     print("Went into if Statement")
-     * <br>
-     * </p>
+     * if(false/true, 0, 1): <br>
+     * print("Went into if Statement") <br>
      */
     void generate_if_statement(Path output, Expression condition, List<Statement> statementList) {
         ProgramBuilder builder = new ProgramBuilder();

@@ -1,20 +1,16 @@
 /* (C)2024 */
 package CBuilder.literals;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.Expression;
+import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-/**
- * Snapshot 23.02.2024
- * print(tupleLiteral) does not work will look into
- */
+/** Snapshot 23.02.2024 print(tupleLiteral) does not work will look into */
 public class TestTupleLiteral {
     String testClass = "[TUPLELITERAL]\n";
 

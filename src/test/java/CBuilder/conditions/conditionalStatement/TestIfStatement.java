@@ -1,26 +1,23 @@
 /* (C)2024 */
 package CBuilder.conditions.conditionalStatement;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import CBuilder.Expression;
 import CBuilder.Statement;
 import CBuilder.literals.BoolLiteral;
 import CBuilder.literals.IntLiteral;
 import CBuilder.objects.AttributeReference;
 import CBuilder.objects.Call;
+import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-/**
- * Snapshot 23.02.2024
- */
+/** Snapshot 23.02.2024 */
 public class TestIfStatement {
     String testClass = "[IFSTATEMENT]\n";
 

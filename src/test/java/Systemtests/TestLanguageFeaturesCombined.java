@@ -1,6 +1,10 @@
 /* (C)2024 */
 package Systemtests;
 
+import static Systemtests.TestHelpers.getProgramOutput;
+import static Systemtests.TestHelpers.makeProgram;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.Expression;
 import CBuilder.ProgramBuilder;
 import CBuilder.Reference;
@@ -11,17 +15,12 @@ import CBuilder.objects.functions.Argument;
 import CBuilder.objects.functions.Function;
 import CBuilder.variables.Assignment;
 import CBuilder.variables.VariableDeclaration;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
-
-import static Systemtests.TestHelpers.getProgramOutput;
-import static Systemtests.TestHelpers.makeProgram;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class TestLanguageFeaturesCombined {
     @Test
@@ -56,53 +55,35 @@ public class TestLanguageFeaturesCombined {
     }
 
     /**
-     * Mini-Python code of program generated:
-     * ```python
-     * a
-     * b
-     * <p>
-     * a = b
-     * d = -30
-     * <p>
-     * type(a)
-     * type(d)
-     * <p>
-     * idA = id(a)
-     * print(idA)
-     * <p>
-     * print(id(a))
-     * id(print(d))
-     * id(type(a))
-     * <p>
-     * e = id(type(print(d)))
-     * e = print(-50)
-     * <p>
-     * type(type)
-     * <p>
-     * def printA(a):
-     * print(a)
-     * printA(idA)
-     * <p>
-     * class B:
-     * def print(self):
-     * print(self)
-     * <p>
-     * def __init__(self):
-     * self.b = 100
-     * <p>
-     * class C(B):
-     * def __init__(self):
-     * <p>
-     * bObj = B()
-     * bObj.print()
-     * <p>
-     * print(bObj.b)
-     * <p>
-     * cObj = C()
-     * cOBJ.print()
-     * <p>
-     * print(cObj.b)
-     * ```
+     * Mini-Python code of program generated: ```python a b
+     *
+     * <p>a = b d = -30
+     *
+     * <p>type(a) type(d)
+     *
+     * <p>idA = id(a) print(idA)
+     *
+     * <p>print(id(a)) id(print(d)) id(type(a))
+     *
+     * <p>e = id(type(print(d))) e = print(-50)
+     *
+     * <p>type(type)
+     *
+     * <p>def printA(a): print(a) printA(idA)
+     *
+     * <p>class B: def print(self): print(self)
+     *
+     * <p>def __init__(self): self.b = 100
+     *
+     * <p>class C(B): def __init__(self):
+     *
+     * <p>bObj = B() bObj.print()
+     *
+     * <p>print(bObj.b)
+     *
+     * <p>cObj = C() cOBJ.print()
+     *
+     * <p>print(cObj.b) ```
      */
     static void generateProgram(Path output) {
         ProgramBuilder builder = new ProgramBuilder();

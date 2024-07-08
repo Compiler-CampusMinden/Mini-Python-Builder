@@ -1,6 +1,10 @@
 /* (C)2024 */
 package Systemtests.LanguageFeatures.BuiltInFunctions;
 
+import static Systemtests.TestHelpers.getProgramOutput;
+import static Systemtests.TestHelpers.makeProgram;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.Expression;
 import CBuilder.ProgramBuilder;
 import CBuilder.Reference;
@@ -10,19 +14,14 @@ import CBuilder.literals.Literal;
 import CBuilder.literals.StringLiteral;
 import CBuilder.objects.AttributeReference;
 import CBuilder.objects.Call;
-import org.junit.jupiter.api.io.TempDir;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
-
-import static Systemtests.TestHelpers.getProgramOutput;
-import static Systemtests.TestHelpers.makeProgram;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class TestCastStr {
     String testClass = '[' + this.getClass().getSimpleName().toUpperCase() + "]\n";
@@ -56,8 +55,8 @@ public class TestCastStr {
     }
 
     /**
-     * <p>Mini Python source code :
-     * <br> print(str( True, False, 23, 0, -23, "testString")) </p>
+     * Mini Python source code : <br>
+     * print(str( True, False, 23, 0, -23, "testString"))
      */
     void generate_cast_str(Path output, Literal value) {
         ProgramBuilder builder = new ProgramBuilder();

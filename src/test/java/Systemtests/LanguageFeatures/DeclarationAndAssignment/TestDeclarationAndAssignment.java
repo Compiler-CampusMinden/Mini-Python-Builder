@@ -1,6 +1,10 @@
 /* (C)2024 */
 package Systemtests.LanguageFeatures.DeclarationAndAssignment;
 
+import static Systemtests.TestHelpers.getProgramOutput;
+import static Systemtests.TestHelpers.makeProgram;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.Expression;
 import CBuilder.ProgramBuilder;
 import CBuilder.Reference;
@@ -14,20 +18,15 @@ import CBuilder.objects.functions.Argument;
 import CBuilder.objects.functions.Function;
 import CBuilder.variables.Assignment;
 import CBuilder.variables.VariableDeclaration;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.List;
-import java.util.stream.Stream;
-
-import static Systemtests.TestHelpers.getProgramOutput;
-import static Systemtests.TestHelpers.makeProgram;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestDeclarationAndAssignment {
     String testClass = '[' + this.getClass().getSimpleName().toUpperCase() + "]\n";
@@ -145,25 +144,17 @@ public class TestDeclarationAndAssignment {
     }
 
     /**
-     * Mini-Python code of program generated :
-     * a
-     * a = 133
+     * Mini-Python code of program generated : a a = 133
+     *
+     * <p>b b = a
+     *
+     * <p>c = print(a)
+     *
      * <p>
-     * b
-     * b = a
-     * <p>
-     * c = print(a)
-     * <p>
-     * <p>
-     * d
-     * def printA(a):
-     * print(a)
-     * d = printA
-     * <p>
-     * print(a)
-     * print(b)
-     * c
-     * d(a)
+     *
+     * <p>d def printA(a): print(a) d = printA
+     *
+     * <p>print(a) print(b) c d(a)
      */
     static void generate_declaration_and_assignment(Path output) {
         ProgramBuilder builder = new ProgramBuilder();
@@ -212,9 +203,10 @@ public class TestDeclarationAndAssignment {
     }
 
     /**
-     * <p>Mini Python source code :
-     * <br> a = 133
-     * <br> print(a) </p>
+     * Mini Python source code : <br>
+     * a = 133 <br>
+     * print(a)
+     *
      * @param output writeProgram to here
      */
     static void generate_assignment_literal(Path output, Literal literal) {
@@ -230,10 +222,11 @@ public class TestDeclarationAndAssignment {
     }
 
     /**
-     * <p>Mini python source code :
-     * <br> a = 133
-     * <br> b = a
-     * <br> print(b) </p>
+     * Mini python source code : <br>
+     * a = 133 <br>
+     * b = a <br>
+     * print(b)
+     *
      * @param output writeProgram to here
      */
     static void generate_assignment_reference(Path output) {
@@ -252,13 +245,13 @@ public class TestDeclarationAndAssignment {
     }
 
     /**
-     * <p>Mini python source code :
-     * <br> a = 133
-     * <br> b
-     * <br> def printA(a):
-     * <br>     print(a)
-     * <br> b = printA
-     * <br> b(a)</p>
+     * Mini python source code : <br>
+     * a = 133 <br>
+     * b <br>
+     * def printA(a): <br>
+     * print(a) <br>
+     * b = printA <br>
+     * b(a)
      *
      * @param output writeProgram to here
      */

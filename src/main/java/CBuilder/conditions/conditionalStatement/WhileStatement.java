@@ -2,13 +2,9 @@ package CBuilder.conditions.conditionalStatement;
 
 import CBuilder.Expression;
 import CBuilder.Statement;
-import CBuilder.conditions.IfThenElseStatement;
-
 import java.util.List;
 
-/**
- * An while loop with condition and statements.
- */
+/** An while loop with condition and statements. */
 public class WhileStatement extends ConditionalStatement implements Statement {
 
     /**
@@ -17,8 +13,7 @@ public class WhileStatement extends ConditionalStatement implements Statement {
      * @param condition The condition of the while loop.
      * @param body The list of statements in the body of the while loop.
      */
-    public WhileStatement(Expression condition,
-                          List<Statement> body) {
+    public WhileStatement(Expression condition, List<Statement> body) {
         super("while", condition, body);
     }
 

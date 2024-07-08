@@ -4,28 +4,21 @@ import CBuilder.Expression;
 import CBuilder.Statement;
 import CBuilder.objects.AttributeReference;
 import CBuilder.objects.Call;
-
 import java.util.List;
-import java.util.Map;
 
 /**
- * Internal base for all conditional control structures that consist of a condition and a body following that condition.
+ * Internal base for all conditional control structures that consist of a condition and a body
+ * following that condition.
  */
 abstract class ConditionalStatement implements Statement {
 
-    /**
-     * The keyword of the representing conditional statement.
-     */
+    /** The keyword of the representing conditional statement. */
     private String keyword;
 
-    /**
-     * The condition of the representing conditional statement.
-     */
+    /** The condition of the representing conditional statement. */
     private Expression condition;
 
-    /**
-     * A List of all statements in the body of the conditional statement.
-     */
+    /** A List of all statements in the body of the conditional statement. */
     private List<Statement> body;
 
     /**
@@ -77,5 +70,7 @@ abstract class ConditionalStatement implements Statement {
     }
 
     @Override
-    public String buildStatement() { return null; }
+    public String buildStatement() {
+        return null;
+    }
 }

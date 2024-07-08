@@ -1,19 +1,15 @@
 /* (C)2024 */
 package CBuilder.bool;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.keywords.bool.NotKeyword;
 import CBuilder.literals.BoolLiteral;
+import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-/**
- * Parameterized tests not really useful here.
- * Snapshot 22.02.2024
- */
+/** Parameterized tests not really useful here. Snapshot 22.02.2024 */
 public class TestNotKeyword {
     String testClass = "[NOTKEYWORD]\n";
 

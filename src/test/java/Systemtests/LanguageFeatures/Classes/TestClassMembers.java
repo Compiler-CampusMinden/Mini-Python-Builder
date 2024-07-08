@@ -1,6 +1,10 @@
 /* (C)2024 */
 package Systemtests.LanguageFeatures.Classes;
 
+import static Systemtests.TestHelpers.getProgramOutput;
+import static Systemtests.TestHelpers.makeProgram;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.Expression;
 import CBuilder.ProgramBuilder;
 import CBuilder.Reference;
@@ -12,17 +16,12 @@ import CBuilder.objects.functions.Function;
 import CBuilder.objects.functions.ReturnStatement;
 import CBuilder.variables.Assignment;
 import CBuilder.variables.VariableDeclaration;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
-
-import static Systemtests.TestHelpers.getProgramOutput;
-import static Systemtests.TestHelpers.makeProgram;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 public class TestClassMembers {
     String testClass = '[' + this.getClass().getSimpleName().toUpperCase() + "]\n";
@@ -86,25 +85,25 @@ public class TestClassMembers {
     }
 
     /**
-     * <p> Mini Python source code for tests from top to bottom :
+     * Mini Python source code for tests from top to bottom : <br>
      * <br>
-     * <br> class A(__MPyType_Object):
+     * class A(__MPyType_Object): <br>
      * <br>
-     * <br>     def __init__(self, val):
-     * <br>         super()
-     * <br>         print("[ClassB] Print from __init__\n")
-     * <br>         self.x = val
+     * def __init__(self, val): <br>
+     * super() <br>
+     * print("[ClassB] Print from __init__\n") <br>
+     * self.x = val <br>
      * <br>
-     * <br>     def getX(self):
-     * <br>         return self.x
+     * def getX(self): <br>
+     * return self.x <br>
      * <br>
-     * <br>     def setX(self, newVal):
-     * <br>         self.x = newVal
+     * def setX(self, newVal): <br>
+     * self.x = newVal <br>
      * <br>
      * <br>
-     * <br> x = A(123)
-     * <br> x.setX(23)
-     * <br> print(x.getX())
+     * x = A(123) <br>
+     * x.setX(23) <br>
+     * print(x.getX())
      */
     void generate_getter_and_setter(Path output, MPyClass mpyClass, List<Expression> initArgs) {
         ProgramBuilder builder = new ProgramBuilder();

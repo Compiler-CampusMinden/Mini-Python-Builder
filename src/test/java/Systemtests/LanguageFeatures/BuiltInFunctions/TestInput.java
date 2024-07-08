@@ -1,27 +1,26 @@
 /* (C)2024 */
 package Systemtests.LanguageFeatures.BuiltInFunctions;
 
+import static Systemtests.TestHelpers.getProgramOutputBasedOnInput;
+import static Systemtests.TestHelpers.makeProgram;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
+
 import CBuilder.Expression;
 import CBuilder.ProgramBuilder;
 import CBuilder.Reference;
 import CBuilder.objects.Call;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.time.Duration;
+import java.util.List;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.time.Duration;
-import java.util.List;
-import java.util.stream.Stream;
-
-import static Systemtests.TestHelpers.getProgramOutputBasedOnInput;
-import static Systemtests.TestHelpers.makeProgram;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 
 @Disabled
 public class TestInput {

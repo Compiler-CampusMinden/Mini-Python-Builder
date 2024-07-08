@@ -1,6 +1,10 @@
 /* (C)2024 */
 package Systemtests.LanguageFeatures.FunctionCalls;
 
+import static Systemtests.TestHelpers.getProgramOutput;
+import static Systemtests.TestHelpers.makeProgram;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.Expression;
 import CBuilder.ProgramBuilder;
 import CBuilder.Reference;
@@ -16,49 +20,43 @@ import CBuilder.objects.functions.Function;
 import CBuilder.objects.functions.ReturnStatement;
 import CBuilder.variables.Assignment;
 import CBuilder.variables.VariableDeclaration;
-import org.junit.jupiter.api.io.TempDir;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
-
-import static Systemtests.TestHelpers.getProgramOutput;
-import static Systemtests.TestHelpers.makeProgram;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class TestFunctionBody {
     String testClass = '[' + this.getClass().getSimpleName().toUpperCase() + "]\n";
 
     /**
-     * <p> Mini Python source code for tests from top to bottom :
+     * Mini Python source code for tests from top to bottom : <br>
      * <br>
-     * <br> def function1():
-     * <br>     return ""
+     * def function1(): <br>
+     * return "" <br>
      * <br>
-     * <br> def function1():
-     * <br>     print("Print from function body")
+     * def function1(): <br>
+     * print("Print from function body") <br>
      * <br>
-     * <br> def function1():
-     * <br>     y = 133
-     * <br>     return y
+     * def function1(): <br>
+     * y = 133 <br>
+     * return y <br>
      * <br>
-     * <br> def function1(x):
-     * <br>     return x
+     * def function1(x): <br>
+     * return x <br>
      * <br>
-     * <br> def function1(x, y):
-     * <br>     return x + y
+     * def function1(x, y): <br>
+     * return x + y <br>
      * <br>
-     * <br> def function1(x, y):
-     * <br>     if(x >= 0):
-     * <br>         return x + y
+     * def function1(x, y): <br>
+     * if(x >= 0): <br>
+     * return x + y <br>
      * <br>
-     * <br> print(function1())
-     * </p>
+     * print(function1())
      */
     private static Stream<Arguments> sources_equals() {
         return Stream.of(

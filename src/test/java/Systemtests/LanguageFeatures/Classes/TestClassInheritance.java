@@ -1,6 +1,10 @@
 /* (C)2024 */
 package Systemtests.LanguageFeatures.Classes;
 
+import static Systemtests.TestHelpers.getProgramOutput;
+import static Systemtests.TestHelpers.makeProgram;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.Expression;
 import CBuilder.ProgramBuilder;
 import CBuilder.Reference;
@@ -12,20 +16,15 @@ import CBuilder.objects.functions.Argument;
 import CBuilder.objects.functions.Function;
 import CBuilder.variables.Assignment;
 import CBuilder.variables.VariableDeclaration;
-import org.junit.jupiter.api.io.TempDir;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-
-import static Systemtests.TestHelpers.getProgramOutput;
-import static Systemtests.TestHelpers.makeProgram;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.io.TempDir;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class TestClassInheritance {
     String testClass = '[' + this.getClass().getSimpleName().toUpperCase() + "]\n";
@@ -98,21 +97,21 @@ public class TestClassInheritance {
     }
 
     /**
-     * <p> Mini Python source code for tests from top to bottom :
+     * Mini Python source code for tests from top to bottom : <br>
      * <br>
-     * <br> class ClassA(__MPyType_Object):
+     * class ClassA(__MPyType_Object): <br>
      * <br>
-     * <br>     def __init__(self, val):
-     * <br>         super()
-     * <br>         print("[ClassA] Print from __init__\n")
+     * def __init__(self, val): <br>
+     * super() <br>
+     * print("[ClassA] Print from __init__\n") <br>
      * <br>
-     * <br> class ClassB(A):
+     * class ClassB(A): <br>
      * <br>
-     * <br>     def __init__(self, val):
-     * <br>         super()
-     * <br>         print("[ClassB] Print from __init__\n")
+     * def __init__(self, val): <br>
+     * super() <br>
+     * print("[ClassB] Print from __init__\n") <br>
      * <br>
-     * <br> x = ClassB(123)
+     * x = ClassB(123)
      */
     void generate_inheritance(Path output, MPyClass parent, MPyClass child) {
         ProgramBuilder builder = new ProgramBuilder();

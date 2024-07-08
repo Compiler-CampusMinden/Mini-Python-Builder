@@ -1,17 +1,16 @@
 /* (C)2024 */
 package CBuilder.objects;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.Expression;
 import CBuilder.literals.BoolLiteral;
 import CBuilder.literals.IntLiteral;
 import CBuilder.literals.StringLiteral;
+import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestAttributeAssignment {
     String testClass = "[ATTRIBUTEASSIGNMENT]\n";

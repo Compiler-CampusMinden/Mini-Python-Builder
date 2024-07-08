@@ -3,29 +3,20 @@ package CBuilder.objects;
 import CBuilder.Expression;
 import CBuilder.Reference;
 import CBuilder.objects.functions.Function;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * Mini-Python class declaration.
- */
+/** Mini-Python class declaration. */
 public class MPyClass extends Reference {
 
-    /**
-     * The reference to the parent class.
-     */
+    /** The reference to the parent class. */
     private final Reference parent;
 
-    /**
-     * The list of methods the class contains.
-     */
+    /** The list of methods the class contains. */
     private final List<Function> functions;
 
-    /**
-     * The list of static attributes the class contains.
-     */
+    /** The list of static attributes the class contains. */
     private final Map<Reference, Expression> classAttributes;
 
     /**
@@ -36,7 +27,11 @@ public class MPyClass extends Reference {
      * @param functions The associated functions and methods.
      * @param classAttributes The classes attributes.
      */
-    public MPyClass(String name, Reference parent, List<Function> functions, Map<Reference, Expression> classAttributes) {
+    public MPyClass(
+            String name,
+            Reference parent,
+            List<Function> functions,
+            Map<Reference, Expression> classAttributes) {
         super(name);
         this.parent = parent;
         this.functions = functions;
@@ -72,12 +67,26 @@ public class MPyClass extends Reference {
         StringBuilder init = new StringBuilder();
 
         // first create the class object
-        init.append(name + " = __mpy_obj_init_type(\"" + name + "\"" + ", " + parent.buildExpression() + ");\n");
+        init.append(
+                name
+                        + " = __mpy_obj_init_type(\""
+                        + name
+                        + "\""
+                        + ", "
+                        + parent.buildExpression()
+                        + ");\n");
         init.append("__mpy_obj_ref_inc(" + name + ");\n");
 
         // then bind attributes
         for (Map.Entry<Reference, Expression> attribute : classAttributes.entrySet()) {
-            init.append("__mpy_obj_set_attr(" + name + ", \"" + attribute.getKey().buildExpression() + "\", " + attribute.getValue().buildExpression() + ");");
+            init.append(
+                    "__mpy_obj_set_attr("
+                            + name
+                            + ", \""
+                            + attribute.getKey().buildExpression()
+                            + "\", "
+                            + attribute.getValue().buildExpression()
+                            + ");");
         }
 
         // and bind functions
@@ -87,15 +96,28 @@ public class MPyClass extends Reference {
             funcBind.append(function.buildFuncObjectDeclaration());
             funcBind.append(function.buildInitialisation());
 
-            funcBind.append("__mpy_obj_set_attr(" + name + ", \"" + function.buildExpression() + "\", " + function.buildExpression() + ");\n");
-            funcBind.append(function.buildRefDec()); // this may look surprising, but keep in mind the function object
-            // is essentially a temporary variable here, which then naturally needs to be correctly refCounted
+            funcBind.append(
+                    "__mpy_obj_set_attr("
+                            + name
+                            + ", \""
+                            + function.buildExpression()
+                            + "\", "
+                            + function.buildExpression()
+                            + ");\n");
+            funcBind.append(
+                    function.buildRefDec()); // this may look surprising, but keep in mind the
+            // function object
+            // is essentially a temporary variable here, which then naturally needs to be correctly
+            // refCounted
 
-           // perform init inside temporary scope to prevent pollution of the current scope
-           // with the function names of the class
+            // perform init inside temporary scope to prevent pollution of the current scope
+            // with the function names of the class
             init.append("{\n");
-            init.append(funcBind.toString().lines().map(string -> "\t" + string + "\n").collect(
-                    Collectors.joining()));
+            init.append(
+                    funcBind.toString()
+                            .lines()
+                            .map(string -> "\t" + string + "\n")
+                            .collect(Collectors.joining()));
             init.append("}\n");
         }
 

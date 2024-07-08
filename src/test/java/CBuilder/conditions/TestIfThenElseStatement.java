@@ -1,19 +1,18 @@
 /* (C)2024 */
 package CBuilder.conditions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import CBuilder.conditions.conditionalStatement.ElifStatement;
 import CBuilder.conditions.conditionalStatement.ElseStatement;
 import CBuilder.conditions.conditionalStatement.IfStatement;
 import CBuilder.literals.BoolLiteral;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class TestIfThenElseStatement {
     String testClass = "[IFTHENELSESTATEMENT]\n";

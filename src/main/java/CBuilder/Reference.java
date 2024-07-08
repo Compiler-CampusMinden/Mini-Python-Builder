@@ -1,13 +1,9 @@
 package CBuilder;
 
-/**
- * Representation of a reference to a MiniPython variable, i. e. a variable name.
- */
+/** Representation of a reference to a MiniPython variable, i. e. a variable name. */
 public class Reference implements Expression {
 
-    /**
-     * The name of the reference.
-     */
+    /** The name of the reference. */
     protected String name;
 
     /**
@@ -24,7 +20,9 @@ public class Reference implements Expression {
      *
      * @return The name of the reference.
      */
-    public String getName() { return this.name; }
+    public String getName() {
+        return this.name;
+    }
 
     @Override
     public String buildExpression() {
@@ -35,5 +33,4 @@ public class Reference implements Expression {
     public String buildStatement() {
         return name + ";\n";
     }
-
 }

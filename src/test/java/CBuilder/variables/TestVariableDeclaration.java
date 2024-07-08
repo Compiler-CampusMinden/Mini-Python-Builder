@@ -1,23 +1,21 @@
 /* (C)2024 */
 package CBuilder.variables;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-/**
- * Snapshot 22.02.2024
- */
+/** Snapshot 22.02.2024 */
 public class TestVariableDeclaration {
     private static Stream<String> sources() {
         return Stream.of("someVar", "anotherOne", "", "'");
     }
 
     /**
-     * <p>var_name # just init</p>
+     * var_name # just init
+     *
      * @param var_name - variable name
      */
     @ParameterizedTest
@@ -40,7 +38,8 @@ public class TestVariableDeclaration {
     }
 
     /**
-     * <p>var_name # with init</p>
+     * var_name # with init
+     *
      * @param var_name - variable name
      */
     @ParameterizedTest
@@ -64,7 +63,8 @@ public class TestVariableDeclaration {
     }
 
     /**
-     * <p>var_name # without init</p>
+     * var_name # without init
+     *
      * @param var_name - variable name
      */
     @ParameterizedTest
@@ -82,7 +82,8 @@ public class TestVariableDeclaration {
     }
 
     /**
-     * <p>Test decrementing reference counter of the variable</p>
+     * Test decrementing reference counter of the variable
+     *
      * @param var_name - variable name
      */
     @ParameterizedTest
