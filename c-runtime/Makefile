@@ -45,11 +45,9 @@ else
 # not for now CFLAGS += -DNDEBUG
 endif
 
-#################
+#####################
 # Default g++ Flags #
-#################
-
-CXXFLAGS ?= -std=c++14
+#####################
 
 ###########
 # Targets #
@@ -130,10 +128,12 @@ test_run:
 	make -f $(TESTDIR)/Systemtests/makefile run
 
 .PHONY: test_target
-test_target:
+test_target: curl_catch
 	d=$$(date +%s)\
 	; 	make -f $(TESTDIR)/Systemtests/makefile test_greater_equal_op \
 	&& echo "Build took $$(($$(date +%s)-d)) seconds"
+	make run_target
+	make test_clean
 
 .PHONY: run_target
 run_target:
