@@ -1,8 +1,8 @@
-#define CATCH_CONFIG_RUNNER
+#define CATCH_CONFIG_MAIN
 
 #include <stddef.h>
 
-#include "catch.hpp"
+#include "catch_amalgamated.hpp"
 #include "test/test_helpers.h"
 #include "test/FunctionCalls/TestFunctionParamsHelpers.h"
 
@@ -14,28 +14,10 @@ __MPyObj *throws5;
 
 void exit(int status);
 
-int main( int argc, char* argv[] ) {
-  // global setup...
-  __mpy_builtins_setup();
-
-  int result = 0;
-
-  try{
-    result = Catch::Session().run( argc, argv );
-  }
-  catch (const std::runtime_error& error){
-      printf("Hello World");
-  }
-
-   __mpy_builtins_cleanup();
-  // global clean-up... Why is this working ? ....
-
-  return result;
-}
-
 int no_param_but_provided(){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
     a = __mpy_obj_init_object();
     __mpy_obj_ref_inc(a);
 
@@ -50,12 +32,15 @@ int no_param_but_provided(){
 
     __mpy_obj_ref_dec(func_throws1);
 
+    __mpy_builtins_cleanup();
+
     return 0;
 }
 
 int one_param_but_none_provided(){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
     a = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(a);
 
@@ -71,12 +56,15 @@ int one_param_but_none_provided(){
 
 	__mpy_obj_ref_dec(throws2);
 
+    __mpy_builtins_cleanup();
+
 	return 0;
 }
 
 int one_param_but_two_provided(){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
     a = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(a);
 
@@ -92,11 +80,14 @@ int one_param_but_two_provided(){
 
 	__mpy_obj_ref_dec(throws3);
 
+    __mpy_builtins_cleanup();
+    return 0;
 }
 
 int one_param_but_void_function_provided(){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
     a = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(a);
 
@@ -111,12 +102,14 @@ int one_param_but_void_function_provided(){
 
 	__mpy_obj_ref_dec(throws4);
 
+    __mpy_builtins_cleanup();
 	return 0;
 }
 
 int two_params_but_one_provided(){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
     a = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(a);
 
@@ -131,6 +124,7 @@ int two_params_but_one_provided(){
 
 	__mpy_obj_ref_dec(throws5);
 
+    __mpy_builtins_cleanup();
 	return 0;
 }
 

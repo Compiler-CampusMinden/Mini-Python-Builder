@@ -1,8 +1,8 @@
-#define CATCH_CONFIG_RUNNER
+#define CATCH_CONFIG_MAIN
 
 #include <stddef.h>
 
-#include "catch.hpp"
+#include "catch_amalgamated.hpp"
 #include "test/test_helpers.h"
 #include "test/FunctionCalls/TestFunctionReturnHelpers.h"
 
@@ -12,28 +12,10 @@ __MPyObj *return_tuple_literal_throws;
 
 __MPyObj *return_void_function_call_print;
 
-int main( int argc, char* argv[] ) {
-  // global setup...
-  __mpy_builtins_setup();
-
-  int result = 0;
-
-  try{
-    result = Catch::Session().run( argc, argv );
-  }
-  catch (const std::runtime_error& error){
-      printf("Hello World");
-  }
-
-   __mpy_builtins_cleanup();
-  // global clean-up... Why is this working ? ....
-
-  return result;
-}
-
 int return_expr(){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
     a = __mpy_obj_init_object();
     __mpy_obj_ref_inc(a);
 
@@ -49,12 +31,14 @@ int return_expr(){
 
     __mpy_obj_ref_dec(return_expression);
 
+    __mpy_builtins_cleanup();
     return (*(int*)(a->content));
 }
 
 int return_tuple_literal(){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
 	a = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(a);
 
@@ -71,12 +55,14 @@ int return_tuple_literal(){
 
 	__mpy_obj_ref_dec(return_tuple_literal_throws);
 
+    __mpy_builtins_cleanup();
 	return 1;
 }
 
 int return_print(){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
     a = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(a);
 
@@ -94,6 +80,7 @@ int return_print(){
 
     __mpy_obj_ref_dec(return_void_function_call_print);
 
+    __mpy_builtins_cleanup();
     return 1;
 }
 

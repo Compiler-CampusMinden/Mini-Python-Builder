@@ -1,8 +1,8 @@
-#define CATCH_CONFIG_RUNNER
+#define CATCH_CONFIG_MAIN
 
 #include <stddef.h>
 
-#include "catch.hpp"
+#include "catch_amalgamated.hpp"
 #include "test/test_helpers.h"
 #include "test/FunctionCalls/TestFunctionBodyHelpers.h"
 
@@ -18,28 +18,10 @@ __MPyObj *return_add;
 
 __MPyObj *return_add_conditional;
 
-int main( int argc, char* argv[] ) {
-  // global setup...
-  __mpy_builtins_setup();
-
-  int result = 0;
-
-  try{
-    result = Catch::Session().run( argc, argv );
-  }
-  catch (const std::runtime_error& error){
-      printf("Hello World");
-  }
-
-   __mpy_builtins_cleanup();
-  // global clean-up... Why is this working ? ....
-
-  return result;
-}
-
 int minimal_body(){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
     a = __mpy_obj_init_object();
     __mpy_obj_ref_inc(a);
 
@@ -55,12 +37,15 @@ int minimal_body(){
 
     __mpy_obj_ref_dec(minimalistic_body);
 
+    __mpy_builtins_cleanup();
+
     return (*(int*)(a->content));
 }
 
 int print_from_func_body(){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
     a = __mpy_obj_init_object();
     __mpy_obj_ref_inc(a);
 
@@ -75,12 +60,15 @@ int print_from_func_body(){
 
     __mpy_obj_ref_dec(print_from_func);
 
+    __mpy_builtins_cleanup();
+
     return (*(int*)(a->content));
 }
 
 int local_var_body(){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
     a = __mpy_obj_init_object();
     __mpy_obj_ref_inc(a);
 
@@ -96,12 +84,15 @@ int local_var_body(){
 
     __mpy_obj_ref_dec(return_local_var);
 
+    __mpy_builtins_cleanup();
+
     return (*(int*)(a->content));
 }
 
 int param_body(){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
     a = __mpy_obj_init_object();
     __mpy_obj_ref_inc(a);
 
@@ -117,12 +108,15 @@ int param_body(){
 
     __mpy_obj_ref_dec(return_param_body);
 
+    __mpy_builtins_cleanup();
+
     return (*(int*)(a->content));
 }
 
 int return_add_body(){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
     a = __mpy_obj_init_object();
     __mpy_obj_ref_inc(a);
 
@@ -138,12 +132,15 @@ int return_add_body(){
 
     __mpy_obj_ref_dec(return_add);
 
+    __mpy_builtins_cleanup();
+
     return (*(int*)(a->content)) == 4 ? 1 : 0;
 }
 
 int return_add_conditional_body(){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
     a = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(a);
 
@@ -158,6 +155,8 @@ int return_add_conditional_body(){
 	__mpy_obj_ref_dec(a);
 
 	__mpy_obj_ref_dec(return_add_conditional);
+
+    __mpy_builtins_cleanup();
 
     return (*(int*)(a->content)) == 4 ? 1 : 0;
 }

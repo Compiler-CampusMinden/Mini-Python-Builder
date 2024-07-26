@@ -5,7 +5,7 @@
 
 #include <stddef.h>
 
-#include "catch.hpp"
+#include "catch_amalgamated.hpp"
 #include "assert.h"
 #include "mpy_aliases.h"
 #include "mpy_obj.h"

@@ -1,36 +1,16 @@
-#define CATCH_CONFIG_RUNNER
+#define CATCH_CONFIG_MAIN
 
-#include <stddef.h>
-
-#include "catch.hpp"
+#include "catch_amalgamated.hpp"
 #include "test/test_helpers.h"
 #include "test/Classes/TestClassMembersHelpers.h"
 
 __MPyObj *getter_setter;
 
-int main( int argc, char* argv[] ) {
-  // global setup...
-  __mpy_builtins_setup();
-
-  int result = 0;
-
-  try{
-    result = Catch::Session().run( argc, argv );
-  }
-  catch (const std::runtime_error& error){
-      printf("");
-  }
-
-   __mpy_builtins_cleanup();
-  // global clean-up... Why is this working ? ....
-
-  return result;
-}
-
 int getX_from_class(){
     __MPyObj *myClass;
     __MPyObj *returnValueGetter;
 
+    __mpy_builtins_setup();
     myClass = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(myClass);
 
@@ -76,6 +56,8 @@ int getX_from_class(){
 
     print_mpyobj_int(returnValueGetter);
 
+    __mpy_builtins_cleanup();
+
 	return (*(int*)(returnValueGetter->content));
 }
 
@@ -83,6 +65,7 @@ int setX_from_class(){
     __MPyObj *myClass;
     __MPyObj *returnValueGetter;
 
+    __mpy_builtins_setup();
     myClass = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(myClass);
 
@@ -135,6 +118,8 @@ int setX_from_class(){
 	__mpy_obj_ref_dec(getter_setter);
 
     print_mpyobj_int(returnValueGetter);
+
+   __mpy_builtins_cleanup();
 
 	return (*(int*)(returnValueGetter->content));
 }

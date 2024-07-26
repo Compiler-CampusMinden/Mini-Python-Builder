@@ -1,8 +1,8 @@
-#define CATCH_CONFIG_RUNNER
+#define CATCH_CONFIG_MAIN
 
 #include <stddef.h>
 
-#include "catch.hpp"
+#include "catch_amalgamated.hpp"
 #include "assert.h"
 #include "mpy_aliases.h"
 #include "mpy_obj.h"
@@ -16,28 +16,10 @@
 #include "type-hierarchy/type.h"
 #include "test/test_helpers.h"
 
-int main( int argc, char* argv[] ) {
-  // global setup...
-  __mpy_builtins_setup();
-
-  int result = 0;
-
-  try{
-    result = Catch::Session().run( argc, argv );
-  }
-  catch (const std::runtime_error& error){
-      printf("Hello World");
-  }
-
-   __mpy_builtins_cleanup();
-  // global clean-up... Why is this working ? ....
-
-  return result;
-}
-
 int eq_op(int i, int j){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
 	a = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(a);
 
@@ -51,6 +33,7 @@ int eq_op(int i, int j){
 
     print_mpyobj_int(a);
 
+   __mpy_builtins_cleanup();
 
 	return (*(int*)(a->content)) == (i == j) ? 1 : 0;
 }
@@ -58,6 +41,7 @@ int eq_op(int i, int j){
 int ne_op(int i, int j){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
 	a = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(a);
 
@@ -70,6 +54,8 @@ int ne_op(int i, int j){
     printf("[NE] i : %d --- j : %d\n",i,j);
 
     print_mpyobj_int(a);
+
+   __mpy_builtins_cleanup();
 
 	return (*(int*)(a->content)) == (i != j) ? 1 : 0;
 }

@@ -16,7 +16,7 @@ export TESTDIR := $(realpath ./test)
 export INCLUDEDIRTEST := $(realpath ./test/include)
 export SRCDIRTEST := $(realpath ./test/src)
 
-export C_FILES_TEST := $(wildcard ./test/src/test/*.c ./test/src/test/*/*.c* ./src/*.c ./src/*/*.c*)
+export C_FILES_TEST := $(wildcard ./test/src/test/*.c ./test/src/test/*/*.c* ./test/src/*.cpp)
 export C_FILES_TEST := $(filter-out ./src/program.c, $(C_FILES_TEST))
 export C_FILES := $(wildcard ./src/*.c ./src/*/*.c*)
 export C_FILES := $(filter-out ./src/program.c, $(C_FILES))
@@ -104,7 +104,8 @@ lint:
 #https://github.com/catchorg/Catch2/blob/v2.x/include/catch.hpp
 .PHONY: curl_catch
 curl_catch:
-	curl -o $(TESTDIR)/include/catch.hpp https://raw.githubusercontent.com/catchorg/Catch2/v2.x/single_include/catch2/catch.hpp
+	curl -o $(TESTDIR)/include/catch_amalgamated.hpp https://raw.githubusercontent.com/catchorg/Catch2/devel/extras/catch_amalgamated.hpp
+	curl -o $(TESTDIR)/src/catch_amalgamated.cpp https://raw.githubusercontent.com/catchorg/Catch2/devel/extras/catch_amalgamated.cpp
 
 .PHONY: test
 test: curl_catch
@@ -130,11 +131,11 @@ test_run:
 .PHONY: test_target
 test_target: curl_catch
 	d=$$(date +%s)\
-	; 	make -f $(TESTDIR)/Systemtests/makefile test_greater_equal_op \
+	; 	make -f $(TESTDIR)/Systemtests/makefile test_declaration_and_assignment \
 	&& echo "Build took $$(($$(date +%s)-d)) seconds"
 	make run_target
 	make test_clean
 
 .PHONY: run_target
 run_target:
-	./test/Systemtests/ComparisonOps/TestGreaterEqualOp.out
+	./test/Systemtests/DeclarationAndAssignment/TestDeclarationAndAssignment.out

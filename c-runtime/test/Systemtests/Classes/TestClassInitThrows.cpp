@@ -1,8 +1,8 @@
-#define CATCH_CONFIG_RUNNER
+#define CATCH_CONFIG_MAIN
 
 #include <stddef.h>
 
-#include "catch.hpp"
+#include "catch_amalgamated.hpp"
 #include "test/test_helpers.h"
 #include "test/Classes/TestClassInitHelpers.h"
 
@@ -14,28 +14,10 @@ __MPyObj *init_multiple_params;
 
 void exit(int status);
 
-int main( int argc, char* argv[] ) {
-  // global setup...
-  __mpy_builtins_setup();
-
-  int result = 0;
-
-  try{
-    result = Catch::Session().run( argc, argv );
-  }
-  catch (const std::runtime_error& error){
-      printf("");
-  }
-
-   __mpy_builtins_cleanup();
-  // global clean-up... Why is this working ? ....
-
-  return result;
-}
-
 int init_class_no_params_but_one_provided(){
     __MPyObj *x;
 
+    __mpy_builtins_setup();
     x = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(x);
 
@@ -62,12 +44,15 @@ int init_class_no_params_but_one_provided(){
 
 	__mpy_obj_ref_dec(init_no_params);
 
+    __mpy_builtins_cleanup();
+
 	return 0;
 }
 
 int init_class_one_param_but_none_provided(){
     __MPyObj *x;
 
+    __mpy_builtins_setup();
     x = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(x);
 
@@ -93,12 +78,15 @@ int init_class_one_param_but_none_provided(){
 
 	print_mpyobj(x);
 
+    __mpy_builtins_cleanup();
+
 	return 0;
 }
 
 int init_class_multiple_params_but_less_provided(){
     __MPyObj *x;
 
+    __mpy_builtins_setup();
     x = __mpy_obj_init_object();
     __mpy_obj_ref_inc(x);
 
@@ -122,6 +110,8 @@ int init_class_multiple_params_but_less_provided(){
     __mpy_obj_ref_dec(init_multiple_params);
 
     print_mpyobj(x);
+
+    __mpy_builtins_cleanup();
 
     return 0;
 }

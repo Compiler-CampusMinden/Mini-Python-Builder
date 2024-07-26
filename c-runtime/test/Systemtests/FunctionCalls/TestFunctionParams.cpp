@@ -1,8 +1,8 @@
-#define CATCH_CONFIG_RUNNER
+#define CATCH_CONFIG_MAIN
 
 #include <stddef.h>
 
-#include "catch.hpp"
+#include "catch_amalgamated.hpp"
 #include "test/test_helpers.h"
 #include "test/FunctionCalls/TestFunctionParamsHelpers.h"
 
@@ -14,28 +14,10 @@ __MPyObj *func3;
 
 __MPyObj *func4;
 
-int main( int argc, char* argv[] ) {
-  // global setup...
-  __mpy_builtins_setup();
-
-  int result = 0;
-
-  try{
-    result = Catch::Session().run( argc, argv );
-  }
-  catch (const std::runtime_error& error){
-      printf("Hello World");
-  }
-
-   __mpy_builtins_cleanup();
-  // global clean-up... Why is this working ? ....
-
-  return result;
-}
-
 int empty_params(const char* expected){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
 	a = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(a);
 
@@ -52,12 +34,15 @@ int empty_params(const char* expected){
 
 	print_mpyobj_str(a);
 
+    __mpy_builtins_cleanup();
+
     return strcmp(((__MPyStrContent*)a->content)->string, expected);
 }
 
 int one_param(__MPyObj *param1, __MPyObj *expected, int isNumeric){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
 	a = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(a);
 
@@ -79,12 +64,16 @@ int one_param(__MPyObj *param1, __MPyObj *expected, int isNumeric){
     }
 
     print_mpyobj_int(a);
+
+    __mpy_builtins_cleanup();
+
     return (*(int*)(a->content)) == (*(int*)(expected->content)) ? 1 : 0;
 }
 
 int one_param_print_call(){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
 	a = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(a);
 
@@ -100,12 +89,15 @@ int one_param_print_call(){
 
 	__mpy_obj_ref_dec(func4);
 
+    __mpy_builtins_cleanup();
+
 	return 0;
 }
 
 int multiple_params(__MPyObj *param1, __MPyObj *param2, __MPyObj *expected, int isNumeric){
     __MPyObj *a;
 
+    __mpy_builtins_setup();
 	a = __mpy_obj_init_object();
 	__mpy_obj_ref_inc(a);
 
@@ -122,10 +114,16 @@ int multiple_params(__MPyObj *param1, __MPyObj *param2, __MPyObj *expected, int 
 
     if(!isNumeric){
         print_mpyobj_str(a);
+
+        __mpy_builtins_cleanup();
+
         return strcmp(((__MPyStrContent*)a->content)->string, ((__MPyStrContent*)expected->content)->string);
     }
 
     print_mpyobj_int(a);
+
+    __mpy_builtins_cleanup();
+
     return (*(int*)(a->content)) == (*(int*)(expected->content)) ? 1 : 0;
 }
 
