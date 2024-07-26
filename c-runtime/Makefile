@@ -122,7 +122,6 @@ test_clean:
 	$(RM) -r $(TESTDIR)/include/catch_amalgamated.hpp
 	$(RM) -r $(TESTDIR)/src/catch_amalgamated.cpp
 
-	touch $(TESTDIR)/include/catch_amalgamated.hpp
 	touch $(TESTDIR)/src/catch_amalgamated.cpp
 
 .PHONY: test_echo
