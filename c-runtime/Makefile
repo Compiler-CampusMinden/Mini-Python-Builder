@@ -118,7 +118,12 @@ test: curl_catch
 .PHONY: test_clean
 test_clean:
 	make -f $(TESTDIR)/Systemtests/makefile clean
-	$(RM) -r $(TESTDIR)/include/catch.hpp
+
+	$(RM) -r $(TESTDIR)/include/catch_amalgamated.hpp
+	$(RM) -r $(TESTDIR)/src/catch_amalgamated.cpp
+
+	touch $(TESTDIR)/include/catch_amalgamated.hpp
+	touch $(TESTDIR)/src/catch_amalgamated.cpp
 
 .PHONY: test_echo
 test_echo:

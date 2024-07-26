@@ -69,11 +69,13 @@ run:
 	.$(RUNCLASSINHERITANCE)
 
 echo:
-	@echo ${C_FILES}
-	@echo ${TESTDIR}
-	@echo ${RUN}
+	@echo $(C_FILES_TEST)
+	@echo $(C_FILES)
+	@echo $(TESTDIR)
+	@echo $(RUN)
 	@echo $(UNAME)
 	@echo $(CC)
+	@echo $(INCLUDEDIRTEST)
 
 test_declaration_and_assignment:
 	$(CC) -I $(INCLUDEDIR) -I $(INCLUDEDIRTEST) -o $(TESTDIR)/Systemtests/DeclarationAndAssignment/TestDeclarationAndAssignment.out -w -fpermissive $(TESTDIR)/Systemtests/DeclarationAndAssignment/TestDeclarationAndAssignment.c* $(C_FILES_TEST) $(C_FILES)
