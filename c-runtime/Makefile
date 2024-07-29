@@ -16,12 +16,14 @@ export TESTDIR := $(realpath ./test)
 export INCLUDEDIRTEST := $(realpath ./test/include)
 export SRCDIRTEST := $(realpath ./test/src)
 
+CATCHFILES = $(TESTDIR)/include/catch_amalgamated.hpp  $(TESTDIR)/src/catch_amalgamated.cpp
 export C_FILES_TEST := $(wildcard ./test/src/test/*.c ./test/src/test/*/*.c* ./test/src/*.cpp)
 export C_FILES_TEST := $(filter-out ./src/program.c, $(C_FILES_TEST))
 export C_FILES := $(wildcard ./src/*.c ./src/*/*.c*)
 export C_FILES := $(filter-out ./src/program.c, $(C_FILES))
 export DOXYFILE := $(realpath ./Doxyfile)
 
+C_FILES_TEST += $(TESTDIR)/src/catch_amalgamated.cpp
 # make DOCDIR available to doxygen
 export DOCDIR := $(abspath ./doc)
 export BINDIR := $(abspath ./bin)
@@ -103,12 +105,12 @@ lint:
 
 #https://github.com/catchorg/Catch2/blob/v2.x/include/catch.hpp
 .PHONY: curl_catch
-curl_catch:
+$(CATCHFILES):
 	curl -o $(TESTDIR)/include/catch_amalgamated.hpp https://raw.githubusercontent.com/catchorg/Catch2/devel/extras/catch_amalgamated.hpp
 	curl -o $(TESTDIR)/src/catch_amalgamated.cpp https://raw.githubusercontent.com/catchorg/Catch2/devel/extras/catch_amalgamated.cpp
 
 .PHONY: test
-test: curl_catch
+test: $(C_FILES_TEST)
 	d=$$(date +%s)\
 	; make -f $(TESTDIR)/Systemtests/makefile \
 	&& echo "Build took $$(($$(date +%s)-d)) seconds"
@@ -122,8 +124,6 @@ test_clean:
 	$(RM) -r $(TESTDIR)/include/catch_amalgamated.hpp
 	$(RM) -r $(TESTDIR)/src/catch_amalgamated.cpp
 
-	touch $(TESTDIR)/src/catch_amalgamated.cpp
-
 .PHONY: test_echo
 test_echo:
 	make -f $(TESTDIR)/Systemtests/makefile echo
@@ -133,7 +133,7 @@ test_run:
 	make -f $(TESTDIR)/Systemtests/makefile run
 
 .PHONY: test_target
-test_target: curl_catch
+test_target: $(C_FILES_TEST)
 	d=$$(date +%s)\
 	; 	make -f $(TESTDIR)/Systemtests/makefile test_declaration_and_assignment \
 	&& echo "Build took $$(($$(date +%s)-d)) seconds"
