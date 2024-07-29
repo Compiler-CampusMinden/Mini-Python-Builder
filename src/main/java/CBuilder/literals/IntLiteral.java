@@ -1,13 +1,9 @@
 package CBuilder.literals;
 
-/**
- * A simple integer literal.
- */
+/** A simple integer literal. */
 public class IntLiteral implements Literal {
 
-    /**
-     * The containing integer value.
-     */
+    /** The containing integer value. */
     long value;
 
     /**

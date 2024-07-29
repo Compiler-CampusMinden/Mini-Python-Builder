@@ -1,13 +1,9 @@
 package CBuilder.literals;
 
-/**
- * A simple boolean literal.
- */
+/** A simple boolean literal. */
 public class BoolLiteral implements Literal {
 
-    /**
-     * The containing boolean value.
-     */
+    /** The containing boolean value. */
     boolean value;
 
     /**
@@ -28,5 +24,4 @@ public class BoolLiteral implements Literal {
     public String buildStatement() {
         return buildExpression() + ";\n";
     }
-
 }

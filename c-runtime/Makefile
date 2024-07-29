@@ -12,18 +12,28 @@ MKDIR_P := mkdir -p
 # make SRCDIR and INCLUDEDIR available to doxygen
 export SRCDIR := $(realpath ./src)
 export INCLUDEDIR := $(realpath ./include)
-DOXYFILE := $(realpath ./Doxyfile)
+export TESTDIR := $(realpath ./test)
+export INCLUDEDIRTEST := $(realpath ./test/include)
+export SRCDIRTEST := $(realpath ./test/src)
 
+CATCHFILES = $(TESTDIR)/include/catch_amalgamated.hpp  $(TESTDIR)/src/catch_amalgamated.cpp
+export C_FILES_TEST := $(wildcard ./test/src/test/*.c ./test/src/test/*/*.c* ./test/src/*.cpp)
+export C_FILES_TEST := $(filter-out ./src/program.c, $(C_FILES_TEST))
+export C_FILES := $(wildcard ./src/*.c ./src/*/*.c*)
+export C_FILES := $(filter-out ./src/program.c, $(C_FILES))
+export DOXYFILE := $(realpath ./Doxyfile)
+
+C_FILES_TEST += $(TESTDIR)/src/catch_amalgamated.cpp
 # make DOCDIR available to doxygen
 export DOCDIR := $(abspath ./doc)
-BINDIR := $(abspath ./bin)
-OUTDIR := $(abspath ./out)
+export BINDIR := $(abspath ./bin)
+export OUTDIR := $(abspath ./out)
 
 #################
 # Default Flags #
 #################
 
-CFLAGS ?= -pedantic -Wall -Werror
+CFLAGS ?= -Wall -Werror -pedantic
 CFLAGS += -std=c11 -I$(INCLUDEDIR)
 CFLAGS += -ffile-prefix-map=$(SRCDIR)=.
 # make getline() (see man getline(3)) available
@@ -37,6 +47,10 @@ else
 # not for now CFLAGS += -DNDEBUG
 endif
 
+#####################
+# Default g++ Flags #
+#####################
+
 ###########
 # Targets #
 ###########
@@ -48,7 +62,6 @@ SRC := $(wildcard $(SRCDIR)/*.c) $(wildcard $(SRCDIR)/*/*.c) $(wildcard $(SRCDIR
 
 OBJECT := $(patsubst $(SRCDIR)/%.c,$(OUTDIR)/%.o,$(SRC))
 DEPENDENCY := $(OBJECT:.o=.d)
-
 
 #########
 # Rules #
@@ -79,6 +92,7 @@ run: $(BIN)
 .PHONY: clean
 clean:
 	$(RM) -r $(BIN) $(OBJECT) $(DEPENDENCY) $(wildcard $(DOCDIR)/*)
+	$(RM) $(TESTDIR)/main
 
 .PHONY: doc
 doc:
@@ -89,11 +103,43 @@ doc:
 lint:
 	clang-tidy --checks=*,-bugprone-reserved-identifier,-cert-dcl37-c,-cert-dcl51-cpp,-altera-struct-pack-align $(SRC)
 
+#https://github.com/catchorg/Catch2/blob/v2.x/include/catch.hpp
+.PHONY: curl_catch
+$(CATCHFILES):
+	curl -o $(TESTDIR)/include/catch_amalgamated.hpp https://raw.githubusercontent.com/catchorg/Catch2/devel/extras/catch_amalgamated.hpp
+	curl -o $(TESTDIR)/src/catch_amalgamated.cpp https://raw.githubusercontent.com/catchorg/Catch2/devel/extras/catch_amalgamated.cpp
 
 .PHONY: test
-test: test_clean
+test: $(C_FILES_TEST)
+	d=$$(date +%s)\
+	; make -f $(TESTDIR)/Systemtests/makefile \
+	&& echo "Build took $$(($$(date +%s)-d)) seconds"
+	make test_clean
 
 
 .PHONY: test_clean
 test_clean:
-	echo "dummy to allow gh workflow to do its job"
+	make -f $(TESTDIR)/Systemtests/makefile clean
+
+	$(RM) -r $(TESTDIR)/include/catch_amalgamated.hpp
+	$(RM) -r $(TESTDIR)/src/catch_amalgamated.cpp
+
+.PHONY: test_echo
+test_echo:
+	make -f $(TESTDIR)/Systemtests/makefile echo
+
+.PHONY: test_run
+test_run:
+	make -f $(TESTDIR)/Systemtests/makefile run
+
+.PHONY: test_target
+test_target: $(C_FILES_TEST)
+	d=$$(date +%s)\
+	; 	make -f $(TESTDIR)/Systemtests/makefile test_declaration_and_assignment \
+	&& echo "Build took $$(($$(date +%s)-d)) seconds"
+	make run_target
+	make test_clean
+
+.PHONY: run_target
+run_target:
+	./test/Systemtests/DeclarationAndAssignment/TestDeclarationAndAssignment.out

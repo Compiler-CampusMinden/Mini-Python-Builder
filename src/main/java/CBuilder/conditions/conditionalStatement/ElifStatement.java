@@ -3,7 +3,6 @@ package CBuilder.conditions.conditionalStatement;
 import CBuilder.Expression;
 import CBuilder.Statement;
 import CBuilder.conditions.IfThenElseStatement;
-
 import java.util.List;
 
 /**
@@ -19,8 +18,7 @@ public class ElifStatement extends ConditionalStatement {
      * @param condition The condition of the elif block.
      * @param body The list of statements in the body of the elif block.
      */
-    public ElifStatement(Expression condition,
-                         List<Statement> body) {
+    public ElifStatement(Expression condition, List<Statement> body) {
         super("else if", condition, body);
     }
 }

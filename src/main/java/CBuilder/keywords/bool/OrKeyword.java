@@ -18,5 +18,4 @@ public class OrKeyword extends BinaryBoolKeyword {
     public OrKeyword(Expression x, Expression y) {
         super("||", x, y);
     }
-
 }

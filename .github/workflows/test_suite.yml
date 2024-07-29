@@ -9,7 +9,7 @@ jobs:
     name: Testing C-Runtime
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -25,18 +25,18 @@ jobs:
         run: make test_clean ; make clean
 
   languagefeatures:
-    name: Testing CBuilder (Java)
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-      - name: Build with Gradle
-        run: ./gradlew test
+      name: Testing CBuilder (Java)
+      strategy:
+          matrix:
+              os: [ubuntu-latest, macos-latest]
+      runs-on: ${{ matrix.os }}
+      steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+          - name: Set up JDK 21
+            uses: actions/setup-java@v4
+            with:
+                java-version: '21'
+                distribution: 'temurin'
+          - name: Build with Gradle
+            run: ./gradlew test

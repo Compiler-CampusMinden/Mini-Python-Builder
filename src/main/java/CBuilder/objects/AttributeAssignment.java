@@ -3,19 +3,13 @@ package CBuilder.objects;
 import CBuilder.Expression;
 import CBuilder.Statement;
 
-/**
- * Assign a value to the attribute of an object.
- */
+/** Assign a value to the attribute of an object. */
 public class AttributeAssignment implements Statement {
 
-    /**
-     * The reference of the attribute in the object scope.
-     */
+    /** The reference of the attribute in the object scope. */
     private AttributeReference attribute;
 
-    /**
-     * The value to assign to the attribute.
-     */
+    /** The value to assign to the attribute. */
     private Expression value;
 
     /**
@@ -31,6 +25,12 @@ public class AttributeAssignment implements Statement {
 
     @Override
     public String buildStatement() {
-        return "__mpy_obj_set_attr(" + attribute.buildObject() + ", " + attribute.buildName() + ", " +  value.buildExpression() + ");";
+        return "__mpy_obj_set_attr("
+                + attribute.buildObject()
+                + ", "
+                + attribute.buildName()
+                + ", "
+                + value.buildExpression()
+                + ");";
     }
 }
