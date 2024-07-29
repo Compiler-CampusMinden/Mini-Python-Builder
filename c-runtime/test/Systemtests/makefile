@@ -129,8 +129,8 @@ test_print:
 test_type:
 	$(CC) -I $(INCLUDEDIR) -I $(INCLUDEDIRTEST) -o $(TESTDIR)/Systemtests/BuiltInFunctions/TestType.out -w -fpermissive $(TESTDIR)/Systemtests/BuiltInFunctions/TestType.c* $(C_FILES_TEST) $(C_FILES)
 
-#test_function_params:
-	#$(CC) -I $(INCLUDEDIR) -I $(INCLUDEDIRTEST) -o $(TESTDIR)/Systemtests/FunctionCalls/TestFunctionParams.out -w -fpermissive $(TESTDIR)/Systemtests/FunctionCalls/TestFunctionParams.c* $(C_FILES_TEST) $(C_FILES)
+test_function_params:
+	$(CC) -I $(INCLUDEDIR) -I $(INCLUDEDIRTEST) -o $(TESTDIR)/Systemtests/FunctionCalls/TestFunctionParams.out -w -fpermissive $(TESTDIR)/Systemtests/FunctionCalls/TestFunctionParams.c* $(C_FILES_TEST) $(C_FILES)
 
 test_function_params_throws:
 	$(CC) -I $(INCLUDEDIR) -I $(INCLUDEDIRTEST) -o $(TESTDIR)/Systemtests/FunctionCalls/TestFunctionParamsThrows.out -w -fpermissive $(TESTDIR)/Systemtests/FunctionCalls/TestFunctionParamsThrows.c* $(C_FILES_TEST) $(C_FILES)
