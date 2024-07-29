@@ -88,3 +88,4 @@ pip-log.txt
 # Catch2 #
 ##########
 c-runtime/test/include/catch_amalgamated.hpp
+c-runtime/test/src/catch_amalgamated.cpp
