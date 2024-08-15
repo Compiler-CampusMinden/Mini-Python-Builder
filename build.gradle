@@ -16,8 +16,12 @@ processResources {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.0-M2'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.0-M2'
+    // cf. https://docs.gradle.org/current/userguide/platforms.html#sub:bom_import
+    testImplementation platform('org.junit:junit-bom:5.11.0')
+
+    // cf. https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 application {
@@ -25,6 +29,7 @@ application {
     mainClass = 'CBuilder.ManualTest'
 }
 
-tasks.named('test') {
+tasks.named('test', Test) {
+    // cf. https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
     useJUnitPlatform()
 }
